@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:jtds:sqlserver://<host>:<port>/JtdsTestDatabase
+    username: SA
+    password: A_Str0ng_Required_Password

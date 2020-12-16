@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:sqlserver://<host>:<port>;database=MicrosoftDriverTestDatabase
+    username: SA
+    password: A_Str0ng_Required_Password

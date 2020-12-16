@@ -1,0 +1,2 @@
+org.springframework.context.ApplicationContextInitializer=com.infobip.testcontainers.spring.mssql.MSSQLServerContainerInitializer
+org.springframework.context.ApplicationListener=com.infobip.testcontainers.spring.mssql.MSSQLServerContainerInitializer
