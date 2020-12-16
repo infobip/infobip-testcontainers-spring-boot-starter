@@ -1,0 +1,253 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.infobip</groupId>
+	<artifactId>infobip-testcontainers-spring-boot-starter</artifactId>
+	<version>3.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>Infobip TestContainers Spring Boot Starter</name>
+
+	<description>Infobip TestContainers Spring Boot Starter provides Spring Boot starters that ease the use of Testcontainers in test and local development scenarios.</description>
+
+	<organization>
+		<name>Infobip Ltd.</name>
+		<url>https://www.infobip.com/</url>
+	</organization>
+
+	<url>https://github.com/infobip/infobip-testcontainers-spring-boot-starter</url>
+
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>A business-friendly OSS license</comments>
+		</license>
+	</licenses>
+
+	<scm>
+		<url>https://github.com/infobip/infobip-testcontainers-spring-boot-starter.git</url>
+		<connection>scm:git:git://github.com:infobip/infobip-testcontainers-spring-boot-starter.git</connection>
+		<developerConnection>scm:git:git@github.com:infobip/infobip-testcontainers-spring-boot-starter.git</developerConnection>
+	</scm>
+
+	<modules>
+		<module>infobip-mssql-testcontainers-spring-boot-starter</module>
+		<module>infobip-postgresql-testcontainers-spring-boot-starter</module>
+		<module>infobip-kafka-testcontainers-spring-boot-starter</module>
+		<module>infobip-redis-testcontainers-spring-boot-starter</module>
+		<module>infobip-testcontainers-common</module>
+        <module>infobip-rabbitmq-testcontainers-spring-boot</module>
+    </modules>
+
+	<developers>
+		<developer>
+			<id>lpandzic</id>
+			<name>Lovro Pandžić</name>
+			<email>lovro.pandzic@infobip.com</email>
+			<organization>Infobip Ltd.</organization>
+		</developer>
+		<developer>
+			<id>NGril</id>
+			<name>Niko Gril</name>
+			<email>niko.gril@infobip.com></email>
+			<organization>Infobip Ltd.</organization>
+		</developer>
+		<developer>
+			<id>FraneJelavic</id>
+			<name>Frane Jelavić</name>
+			<email>frane.jelavic@infobip.com></email>
+			<organization>Infobip Ltd.</organization>
+		</developer>
+		<developer>
+			<id>igor-susic</id>
+			<name>Igor Šušić</name>
+			<email>igor.susic@infobip.com</email>
+			<organization>Infobip Ltd.</organization>
+		</developer>
+	</developers>
+
+	<properties>
+		<!-- DEPENDENCY VERSIONS -->
+		<spring-boot.version>2.4.1</spring-boot.version>
+
+		<testcontainers.version>1.15.0</testcontainers.version>
+
+		<!-- PLUGIN VERSIONS -->
+		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+		<cobertura-maven-plugin.version>2.7</cobertura-maven-plugin.version>
+		<coveralls-maven-plugin.version>4.3.0</coveralls-maven-plugin.version>
+		<jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
+		<maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
+		<maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>
+		<maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+		<maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
+
+		<!-- OTHER PROPERTIES -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring-boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<!-- SPRING -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-test</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-autoconfigure</artifactId>
+		</dependency>
+
+		<!--TEST-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>${maven-javadoc-plugin.version}</version>
+					<configuration>
+						<source>${java.version}</source>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-failsafe-plugin</artifactId>
+					<version>${maven-failsafe-plugin.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<compilerArgument>-parameters</compilerArgument>
+					<testCompilerArgument>-parameters</testCompilerArgument>
+					<encoding>utf8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco-maven-plugin.version}</version>
+				<configuration>
+					<excludes>
+						<exclude>com/infobip/spring/data/jdbc/QPerson.class</exclude>
+						<exclude>com/infobip/spring/data/jdbc/QFlywaySchemaHistory.class</exclude>
+						<exclude>com/infobip/spring/data/jdbc/QPersonSettings.class</exclude>
+						<exclude>com/infobip/spring/data/jpa/QPerson.class</exclude>
+						<exclude>com/infobip/spring/data/jpa/QPersonSettings.class</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.eluder.coveralls</groupId>
+				<artifactId>coveralls-maven-plugin</artifactId>
+				<version>${coveralls-maven-plugin.version}</version>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>release-sign-artifacts</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>${maven-gpg-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<distributionManagement>
+		<repository>
+			<id>ossrh-releases</id>
+			<name>SonatypeReleases</name>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+		</repository>
+		<snapshotRepository>
+			<id>ossrh-snapshots</id>
+			<name>SonatypeSnapshots</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<repositories>
+		<repository>
+			<id>spring-repo</id>
+			<name>Spring Milestones Repository</name>
+			<url>https://repo.spring.io/milestone</url>
+		</repository>
+	</repositories>
+</project>
