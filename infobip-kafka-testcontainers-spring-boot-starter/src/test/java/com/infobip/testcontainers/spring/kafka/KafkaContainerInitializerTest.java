@@ -1,6 +1,7 @@
 package com.infobip.testcontainers.spring.kafka;
 
 import lombok.AllArgsConstructor;
+import org.awaitility.Awaitility;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -8,6 +9,8 @@ import org.springframework.kafka.support.SendResult;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestConstructor;
 
+import java.time.Duration;
+import java.util.Objects;
 import java.util.concurrent.*;
 
 import static org.assertj.core.api.BDDAssertions.then;
@@ -36,6 +39,15 @@ class KafkaContainerInitializerTest {
 
         // then
         then(actual).isNotNull();
-        then(listener.value.get()).isEqualTo(givenData);
+        Awaitility.await().atMost(Duration.ofSeconds(10)).until(() -> {
+            String value = listener.getValue();
+
+            if(Objects.isNull(value)) {
+                return false;
+            }
+
+            then(value).isEqualTo(givenData);
+            return true;
+        });
     }
 }
