@@ -1,0 +1,4 @@
+spring:
+  rabbitmq:
+    docker:
+      image: rabbitmq:3.6.14-alpine
