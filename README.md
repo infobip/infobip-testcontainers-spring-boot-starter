@@ -1,10 +1,8 @@
 # Infobip Testcontainers Spring Boot Starter
 
-[![Build Status](https://github.com/infobip/infobip-testcontainers-spring-boot-starter/workflows/maven/badge.svg)](https://github.com/infobip/infobip-testcontainers-spring-boot-starter/actions)
-[![Build Status](https://github.com/infobip/infobip-testcontainers-spring-boot-starter/workflows/maven/badge.svg)](https://github.com/infobip/infobip-testcontainers-spring-boot-starter/workflows/maven/badge.svg)
+![](https://github.com/infobip/infobip-testcontainers-spring-boot-starter/workflows/maven/badge.svg)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.infobip/infobip-testcontainers-spring-boot-starter/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.infobip/infobip-testcontainers-spring-boot-starter)
 [![Coverage Status](https://coveralls.io/repos/github/infobip/infobip-testcontainers-spring-boot-starter/badge.svg?branch=master)](https://coveralls.io/github/infobip/infobip-testcontainers-spring-boot-starter?branch=master)
-
 
 Library containing Spring Boot starters which manage lifecycle (start/stop) of [testcontainers](https://www.testcontainers.org/).
 
