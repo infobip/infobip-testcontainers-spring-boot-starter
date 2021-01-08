@@ -40,7 +40,7 @@ Usual use cases include:
 
 ### 3.1.0
 
-## MSSQL: 
+#### MSSQL: 
 * username and password are now automatically injected and don't need to be explicitly set in configuration (note that they are not overriden if they do exist)
 * `spring.flyway` and `spring.r2dbc` are now supported
 
