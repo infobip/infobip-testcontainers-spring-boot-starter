@@ -63,8 +63,6 @@ jTDS:
 spring:
   datasource:
     url: jdbc:jtds:sqlserver://<host>:<port>/FooBarDb
-    username: SA
-    password: A_Str0ng_Required_Password
 ```
 
 Microsoft driver:
@@ -73,8 +71,6 @@ Microsoft driver:
 spring:
   datasource:
     url: jdbc:sqlserver://<host>:<port>;database=FooBarDb
-    username: SA
-    password: A_Str0ng_Required_Password
 ```
 
 Logical database is automatically created.

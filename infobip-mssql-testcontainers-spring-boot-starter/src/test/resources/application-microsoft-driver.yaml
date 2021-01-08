@@ -1,5 +1,7 @@
 spring:
   datasource:
     url: jdbc:sqlserver://<host>:<port>;database=MicrosoftDriverTestDatabase
-    username: SA
-    password: A_Str0ng_Required_Password
+  r2dbc:
+    url: r2dbc:pool:mssql://<host>:<port>/InfobipSpringDataJdbcQuerydslTest
+  flyway:
+    url: jdbc:sqlserver://<host>:<port>;database=MicrosoftDriverTestDatabase
