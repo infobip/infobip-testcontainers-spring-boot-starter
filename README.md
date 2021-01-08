@@ -119,8 +119,6 @@ jTDS:
 spring:
   datasource:
     url: jdbc:jtds:sqlserver://<host>:<port>/FooBarDb_test_${user.name}
-    username: SA
-    password: A_Str0ng_Required_Password
 ```
 
 Microsoft driver:
@@ -129,8 +127,6 @@ Microsoft driver:
 spring:
   datasource:
     url: jdbc:sqlserver://<host>:<port>;database=FooBarDb_test_${user.name}
-    username: SA
-    password: A_Str0ng_Required_Password
 ```
 
 <a name="MSSQLDockerImage"></a>
