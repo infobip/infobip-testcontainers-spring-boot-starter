@@ -19,10 +19,10 @@ public class RabbitContainerInitializer extends InitializerBase<RabbitContainerW
                 environment.getProperty("testcontainers.rabbit.docker.image"))
                                                    .map(RabbitContainerWrapper::new)
                                                    .orElseGet(
-                                                           () -> new RabbitContainerWrapper("rabbitmq:3.6.14-alpine"));
+                                                           () -> new RabbitContainerWrapper("rabbitmq:3.8.9-alpine"));
 
-        start(container);
         container.waitingFor(Wait.forListeningPort());
+        start(container);
 
         TestPropertyValues values = TestPropertyValues.of(
                 String.format("spring.rabbitmq.addresses=%s:%d", container.getContainerIpAddress(),
