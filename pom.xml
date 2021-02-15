@@ -72,7 +72,7 @@
 		<!-- DEPENDENCY VERSIONS -->
 		<spring-boot.version>2.4.1</spring-boot.version>
 
-		<testcontainers.version>1.15.1</testcontainers.version>
+		<testcontainers.version>1.15.2</testcontainers.version>
 
 		<!-- PLUGIN VERSIONS -->
 		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
