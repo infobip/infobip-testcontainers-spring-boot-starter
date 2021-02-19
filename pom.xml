@@ -3,7 +3,7 @@
 
 	<groupId>com.infobip</groupId>
 	<artifactId>infobip-testcontainers-spring-boot-starter</artifactId>
-	<version>3.1.1-SNAPSHOT</version>
+	<version>3.1.1</version>
 	<packaging>pom</packaging>
 
 	<name>Infobip TestContainers Spring Boot Starter</name>
@@ -30,7 +30,7 @@
 		<url>git@github.com:infobip/infobip-testcontainers-spring-boot-starter.git</url>
 		<connection>scm:git:git@github.com:infobip/infobip-testcontainers-spring-boot-starter.git</connection>
 		<developerConnection>scm:git:git@github.com:infobip/infobip-testcontainers-spring-boot-starter.git</developerConnection>
-		<tag>HEAD</tag>
+		<tag>infobip-testcontainers-spring-boot-starter-3.1.1</tag>
 	</scm>
 
 	<modules>
@@ -52,13 +52,13 @@
 		<developer>
 			<id>NGril</id>
 			<name>Niko Gril</name>
-			<email>niko.gril@infobip.com></email>
+			<email>niko.gril@infobip.com&gt;</email>
 			<organization>Infobip Ltd.</organization>
 		</developer>
 		<developer>
 			<id>FraneJelavic</id>
 			<name>Frane Jelavić</name>
-			<email>frane.jelavic@infobip.com></email>
+			<email>frane.jelavic@infobip.com&gt;</email>
 			<organization>Infobip Ltd.</organization>
 		</developer>
 		<developer>
