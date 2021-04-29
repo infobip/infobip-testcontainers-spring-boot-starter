@@ -35,8 +35,18 @@ Usual use cases include:
         * [Tests](#RabbitMqTests)
         * [Local development](#RabbitMqLocalDevelopment)
         * [Docker image](#RabbitMqDockerImage)
+    * [ClickHouse](#ClickHouse)
+        * [Tests](#ClickHouseTests)
+        * [Local development](#ClickHouseLocalDevelopment)
+        * [Docker image version](#ClickHouseDockerImageVersion)
+        
 
 ## <a name="News"></a> News
+
+### 3.2.0
+####ClickHouse:
+* Added support for ClickHouse
+* Custom path for ClickHouse jdbc properties can be provided under `testcontainers.clickhouse.custom-path` property. In case custom path is not provided, properties under `spring.datasource` will be used
 
 ### 3.1.0
 
@@ -451,6 +461,72 @@ To change the docker image used simply add the following property (e.g. in yaml)
 ```yaml
 testcontainers.rabbit.docker.image: rabbitmq:3.6.14-alpine
 ```
+<a name="ClickHouse"></a>
+### ClickHouse
+<a name="ClickHouseTests"></a>
+##Tests
+Include the dependency:
+
+```xml
+<dependency>
+	<groupId>com.infobip</groupId>
+	<artifactId>infobip-clickhouse-testcontainers-spring-boot-starter</artifactId>
+	<version>${infobip-clickhouse-testcontainers-spring-boot-starter.version}</version>
+	<scope>test</scope>
+</dependency>
+```
+<a name="ClickHouseLocalDevelopment"></a>
+##Local development
+Add the following profile:
+
+```xml
+<profiles>
+    <profile>
+        <id>development</id>
+        <dependencies>
+            <dependency>
+                <groupId>com.infobip</groupId>
+                <artifactId>infobip-clickhouse-testcontainers-spring-boot-starter</artifactId>
+                <version>${infobip-clickhouse-testcontainers-spring-boot-starter.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </profile>
+</profiles>
+```
+
+Before starting the application locally, activate development profile:
+
+![profile.png](profile.png)
+<a name="ClickHouseDockerImageVersion"></a>
+
+and update your local configuration (e.g. application-development.yaml):
+
+```yaml
+spring:
+  datasource:
+    jdbc-url: <host>:<port>
+```
+In case your datasource configuration is different from default one you can provide custom configuration property path
+```yaml
+    testcontainers.clickhouse.custom-path: "spring.datasource.clickhouse"
+```
+in this case your configuration would look like this
+
+```yaml
+spring:
+  datasource:
+      clickhouse:
+        jdbc-url: <host>:<port>
+```
+
+##Docker image version
+
+To change the docker image used simply add the following property (e.g. in yaml):
+
+```yaml
+testcontainers.clickhouse.docker.image: rabbitmq:latest
+```
 
 ## <a name="Contributing"></a> Contributing
 
@@ -461,3 +537,4 @@ Pull requests are welcome!
 ## <a name="License"></a> License
 
 This library is licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+
