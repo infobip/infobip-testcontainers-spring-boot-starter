@@ -466,7 +466,7 @@ testcontainers.rabbit.docker.image: rabbitmq:3.6.14-alpine
 ### ClickHouse
 
 <a name="ClickHouseTests"></a>
-####Tests
+#### Tests
 
 Include the dependency:
 
@@ -480,7 +480,7 @@ Include the dependency:
 ```
 
 <a name="ClickHouseLocalDevelopment"></a>
-####Local development
+#### Local development
 
 Add the following profile:
 
@@ -525,7 +525,7 @@ spring:
         jdbc-url: <host>:<port>
 ```
 
-####Docker image version
+#### Docker image version
 
 To change the docker image used simply add the following property (e.g. in yaml):
 
