@@ -44,6 +44,7 @@ Usual use cases include:
 ## <a name="News"></a> News
 
 ### 3.2.0
+
 ####ClickHouse:
 * Added support for ClickHouse
 * Custom path for ClickHouse jdbc properties can be provided under `testcontainers.clickhouse.custom-path` property. In case custom path is not provided, properties under `spring.datasource` will be used
