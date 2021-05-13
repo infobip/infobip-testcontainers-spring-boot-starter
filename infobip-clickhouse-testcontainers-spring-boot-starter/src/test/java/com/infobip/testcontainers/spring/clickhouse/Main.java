@@ -1,4 +1,4 @@
-package com.infobip.testcontainers.spring.kafka;
+package com.infobip.testcontainers.spring.clickhouse;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
