@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:sqlserver://<host>:1433;database=MicrosoftDriverTestDatabase
+  r2dbc:
+    url: r2dbc:pool:mssql://<host>:1433/InfobipSpringDataJdbcQuerydslTest
+  flyway:
+    url: jdbc:sqlserver://<host>:1433;database=MicrosoftDriverTestDatabase
