@@ -1,3 +1,7 @@
+### 3.3.0
+General:
+* Added support for starting containers on a predefined port
+
 ### 3.2.0
 
 #### ClickHouse:
