@@ -3,8 +3,6 @@ package com.infobip.testcontainers.spring.clickhouse;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import com.infobip.testcontainers.InitializerBase;
 import org.springframework.boot.test.util.TestPropertyValues;
@@ -12,8 +10,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
 
 public class ClickhouseContainerInitializer extends InitializerBase<ClickhouseContainerWrapper> {
-
-    private static final Pattern JDBC_URL_WITH_DEFINED_PORT_PATTERN = Pattern.compile(".*://.*:(\\d+)(/.*)?");
 
     @Override
     public void initialize(ConfigurableApplicationContext applicationContext) {
@@ -26,25 +22,18 @@ public class ClickhouseContainerInitializer extends InitializerBase<ClickhouseCo
                                                        .map(ClickhouseContainerWrapper::new)
                                                        .orElseGet(ClickhouseContainerWrapper::new);
 
-        resolveStaticPort(jdbcUrlValue)
+        resolveStaticPort(jdbcUrlValue, JDBC_URL_WITH_PORT_GROUP_PATTERN)
             .ifPresent(staticPort -> container.setPortBindings(Collections.singletonList(staticPort + ":" + ClickhouseContainerWrapper.HTTP_PORT)));
 
         start(container);
-        String url = jdbcUrlValue.replace("<host>", container.getContainerIpAddress())
-                                 .replace("<port>", container.getMappedPort(ClickhouseContainerWrapper.HTTP_PORT)
-                                                             .toString());
+
+        String url = replaceHostAndPortPlaceholders(jdbcUrlValue,
+                                                    container.getContainerIpAddress(),
+                                                    container.getMappedPort(ClickhouseContainerWrapper.HTTP_PORT));
+
         TestPropertyValues values = TestPropertyValues.of(
             String.format("%s=%s", jdbcUrlPropertyPath, url));
         values.applyTo(applicationContext);
-    }
-
-    // todo - unduplicate
-    private Optional<Integer> resolveStaticPort(String connectionString) {
-        return Optional.ofNullable(connectionString)
-                       .map(JDBC_URL_WITH_DEFINED_PORT_PATTERN::matcher)
-                       .filter(Matcher::matches)
-                       .map(matcher -> matcher.group(1))
-                       .map(Integer::valueOf);
     }
 
 }

@@ -3,15 +3,12 @@ package com.infobip.testcontainers.spring.mssql;
 import static org.testcontainers.containers.MSSQLServerContainer.MS_SQL_SERVER_PORT;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import com.infobip.testcontainers.InitializerBase;
@@ -24,7 +21,6 @@ public class MSSQLServerContainerInitializer extends InitializerBase<MSSQLServer
     private static final List<String> DEFAULT_PROPERTY_NAMES = Arrays.asList("spring.datasource.url",
                                                                              "spring.flyway.url",
                                                                              "spring.r2dbc.url");
-    private static final Pattern JDBC_URL_WITH_DEFINED_PORT_PATTERN = Pattern.compile(".*://.*:(\\d+)(/.*)?");
 
     @Override
     public void initialize(ConfigurableApplicationContext applicationContext) {
@@ -37,7 +33,7 @@ public class MSSQLServerContainerInitializer extends InitializerBase<MSSQLServer
                                                         .map(MSSQLServerContainerWrapper::new)
                                                         .orElseGet(MSSQLServerContainerWrapper::new);
 
-        resolveStaticPort(urlPropertyNameToValue.values())
+        resolveStaticPort(urlPropertyNameToValue.values(), JDBC_URL_WITH_PORT_GROUP_PATTERN)
             .ifPresent(staticPort -> container.setPortBindings(Collections.singletonList(staticPort + ":" + MS_SQL_SERVER_PORT)));
 
         start(container);
@@ -78,24 +74,14 @@ public class MSSQLServerContainerInitializer extends InitializerBase<MSSQLServer
         return propertyNameToValue;
     }
 
-    private Optional<Integer> resolveStaticPort(Collection<String> connectionStrings) {
-        return connectionStrings.stream()
-                                .map(JDBC_URL_WITH_DEFINED_PORT_PATTERN::matcher)
-                                .filter(Matcher::matches)
-                                .map(matcher -> matcher.group(1))
-                                .findFirst()
-                                .map(Integer::valueOf);
-    }
-
     private Map<String, String> replaceHostAndPort(Map<String, String> urlPropertyNameToValue,
                                                    MSSQLServerContainerWrapper container) {
         String host = container.getContainerIpAddress();
-        String port = container.getMappedPort(MS_SQL_SERVER_PORT).toString();
+        Integer port = container.getMappedPort(MS_SQL_SERVER_PORT);
         return urlPropertyNameToValue.entrySet()
                                      .stream()
                                      .collect(Collectors.toMap(Map.Entry::getKey,
-                                                               entry -> entry.getValue().replace("<host>", host)
-                                                                             .replace("<port>", port)));
+                                                               entry -> replaceHostAndPortPlaceholders(entry.getValue(), host, port)));
     }
 
     private Map<String, String> addMissingUsernameAndPassword(Map<String, String> urlPropertyNameToValue,
