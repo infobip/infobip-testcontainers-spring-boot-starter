@@ -21,7 +21,7 @@ import org.testcontainers.Testcontainers;
 @ActiveProfiles("static-port")
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @SpringBootTest(classes = Main.class)
-class StaticPortSqlServerDockerTest {
+class SqlServerWithStaticPortTest {
 
     private final Environment environment;
     private final DataSourceProperties properties;
