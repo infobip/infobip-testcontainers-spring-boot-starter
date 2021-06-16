@@ -38,7 +38,7 @@ class KafkaContainerInitializerWithStaticPortTest {
         // when
         SendResult<?, ?> actual = kafkaTemplate.send(TOPIC_NAME, "key", givenData)
                                                .completable()
-                                               .get(10, TimeUnit.SECONDS);
+                                               .get(30, TimeUnit.SECONDS);
 
         // then
         then(actual).isNotNull();
