@@ -24,7 +24,7 @@ public class MSSQLServerContainerInitializer extends InitializerBase<MSSQLServer
     private static final List<String> DEFAULT_PROPERTY_NAMES = Arrays.asList("spring.datasource.url",
                                                                              "spring.flyway.url",
                                                                              "spring.r2dbc.url");
-    private static final Pattern JDBC_URL_WITH_FIXED_PORT_PATTERN = Pattern.compile(".*://.*:(\\d+)/.*");
+    private static final Pattern JDBC_URL_WITH_DEFINED_PORT_PATTERN = Pattern.compile(".*://.*:(\\d+)(/.*)?");
 
     @Override
     public void initialize(ConfigurableApplicationContext applicationContext) {
@@ -38,7 +38,7 @@ public class MSSQLServerContainerInitializer extends InitializerBase<MSSQLServer
                                                         .orElseGet(MSSQLServerContainerWrapper::new);
 
         resolveStaticPort(urlPropertyNameToValue.values())
-            .ifPresent(fixedPort -> container.setPortBindings(Collections.singletonList(fixedPort + ":" + MS_SQL_SERVER_PORT)));
+            .ifPresent(staticPort -> container.setPortBindings(Collections.singletonList(staticPort + ":" + MS_SQL_SERVER_PORT)));
 
         start(container);
         Map<String, String> replacedNameToValue = replaceHostAndPort(urlPropertyNameToValue, container);
@@ -80,7 +80,7 @@ public class MSSQLServerContainerInitializer extends InitializerBase<MSSQLServer
 
     private Optional<Integer> resolveStaticPort(Collection<String> connectionStrings) {
         return connectionStrings.stream()
-                                .map(JDBC_URL_WITH_FIXED_PORT_PATTERN::matcher)
+                                .map(JDBC_URL_WITH_DEFINED_PORT_PATTERN::matcher)
                                 .filter(Matcher::matches)
                                 .map(matcher -> matcher.group(1))
                                 .findFirst()

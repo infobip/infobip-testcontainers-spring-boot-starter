@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    clickhouse:
+        jdbc-url: jdbc:clickhouse://<host>:5000
+
+testcontainers:
+        clickhouse:
+            custom-path: "spring.datasource.clickhouse"
