@@ -17,7 +17,7 @@ import org.springframework.test.context.TestConstructor;
 @ActiveProfiles("static-port")
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @SpringBootTest(classes = Main.class)
-class ClickhouseContainerStaticPortTest {
+class ClickhouseContainerInitializerWithStaticPortTest {
 
     Environment environment;
     DataSource dataSource;

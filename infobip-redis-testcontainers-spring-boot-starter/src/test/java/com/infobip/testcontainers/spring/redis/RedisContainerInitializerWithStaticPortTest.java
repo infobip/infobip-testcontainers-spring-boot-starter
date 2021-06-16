@@ -14,7 +14,7 @@ import org.springframework.test.context.TestConstructor;
 @ActiveProfiles("static-port")
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @SpringBootTest(classes = Main.class)
-class RedisContainerWithStaticPortTest {
+class RedisContainerInitializerWithStaticPortTest {
 
     private final RedisTemplate<String, String> template;
     private final RedisProperties redisProperties;

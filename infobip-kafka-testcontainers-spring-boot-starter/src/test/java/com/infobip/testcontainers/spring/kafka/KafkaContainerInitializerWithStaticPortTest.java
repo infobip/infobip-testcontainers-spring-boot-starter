@@ -22,7 +22,7 @@ import org.springframework.test.context.TestConstructor;
 @ActiveProfiles("static-port")
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @SpringBootTest(classes = Main.class)
-class KafkaContainerWithStaticPortTest {
+class KafkaContainerInitializerWithStaticPortTest {
 
     final static String TOPIC_NAME = "test-topic";
 

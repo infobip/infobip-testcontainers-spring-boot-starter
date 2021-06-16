@@ -18,7 +18,7 @@ import org.springframework.test.context.TestConstructor;
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @TestConfiguration
 @SpringBootTest(classes = Main.class)
-class RabbitContainerWithStaticPortTest {
+class RabbitContainerInitializerWithStaticPortTest {
 
     private final RabbitTemplate rabbitTemplate;
     private final RabbitProperties rabbitProperties;
