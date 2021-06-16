@@ -33,7 +33,7 @@ public class MSSQLServerContainerInitializer extends InitializerBase<MSSQLServer
                                                         .map(MSSQLServerContainerWrapper::new)
                                                         .orElseGet(MSSQLServerContainerWrapper::new);
 
-        resolveStaticPort(urlPropertyNameToValue.values(), JDBC_URL_WITH_PORT_GROUP_PATTERN)
+        resolveStaticPort(urlPropertyNameToValue.values(), GENERIC_URL_WITH_PORT_GROUP_PATTERN)
             .ifPresent(staticPort -> bindPort(container, staticPort, MS_SQL_SERVER_PORT));
 
         start(container);
@@ -76,12 +76,10 @@ public class MSSQLServerContainerInitializer extends InitializerBase<MSSQLServer
 
     private Map<String, String> replaceHostAndPort(Map<String, String> urlPropertyNameToValue,
                                                    MSSQLServerContainerWrapper container) {
-        String host = container.getContainerIpAddress();
-        Integer port = container.getMappedPort(MS_SQL_SERVER_PORT);
         return urlPropertyNameToValue.entrySet()
                                      .stream()
                                      .collect(Collectors.toMap(Map.Entry::getKey,
-                                                               entry -> replaceHostAndPortPlaceholders(entry.getValue(), host, port)));
+                                                               entry -> replaceHostAndPortPlaceholders(entry.getValue(), container, MS_SQL_SERVER_PORT)));
     }
 
     private Map<String, String> addMissingUsernameAndPassword(Map<String, String> urlPropertyNameToValue,

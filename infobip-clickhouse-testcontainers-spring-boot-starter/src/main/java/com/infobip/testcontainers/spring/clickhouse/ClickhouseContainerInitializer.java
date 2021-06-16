@@ -1,6 +1,5 @@
 package com.infobip.testcontainers.spring.clickhouse;
 
-import java.util.Collections;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -22,14 +21,12 @@ public class ClickhouseContainerInitializer extends InitializerBase<ClickhouseCo
                                                        .map(ClickhouseContainerWrapper::new)
                                                        .orElseGet(ClickhouseContainerWrapper::new);
 
-        resolveStaticPort(jdbcUrlValue, JDBC_URL_WITH_PORT_GROUP_PATTERN)
+        resolveStaticPort(jdbcUrlValue, GENERIC_URL_WITH_PORT_GROUP_PATTERN)
             .ifPresent(staticPort -> bindPort(container, staticPort, ClickhouseContainerWrapper.HTTP_PORT));
 
         start(container);
 
-        String url = replaceHostAndPortPlaceholders(jdbcUrlValue,
-                                                    container.getContainerIpAddress(),
-                                                    container.getMappedPort(ClickhouseContainerWrapper.HTTP_PORT));
+        String url = replaceHostAndPortPlaceholders(jdbcUrlValue, container, ClickhouseContainerWrapper.HTTP_PORT);
 
         TestPropertyValues values = TestPropertyValues.of(
             String.format("%s=%s", jdbcUrlPropertyPath, url));

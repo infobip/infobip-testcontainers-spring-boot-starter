@@ -27,14 +27,12 @@ public class PostgreSQLContainerInitializer extends InitializerBase<PostgreSQLCo
                                                        .map(imageName -> new PostgreSQLContainerWrapper(database, imageName))
                                                        .orElseGet(() -> new PostgreSQLContainerWrapper(database));
 
-        resolveStaticPort(dataSourceUrl, JDBC_URL_WITH_PORT_GROUP_PATTERN)
+        resolveStaticPort(dataSourceUrl, GENERIC_URL_WITH_PORT_GROUP_PATTERN)
             .ifPresent(staticPort -> bindPort(container, staticPort, PostgreSQLContainerWrapper.POSTGRESQL_PORT));
 
         start(container);
 
-        String url = replaceHostAndPortPlaceholders(dataSourceUrl,
-                                                    container.getContainerIpAddress(),
-                                                    container.getMappedPort(PostgreSQLContainerWrapper.POSTGRESQL_PORT));
+        String url = replaceHostAndPortPlaceholders(dataSourceUrl, container, PostgreSQLContainerWrapper.POSTGRESQL_PORT);
         TestPropertyValues values = TestPropertyValues.of(dataSourceUrlPropertyName + "=" + url);
 
         values.applyTo(applicationContext);

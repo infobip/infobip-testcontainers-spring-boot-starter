@@ -36,9 +36,7 @@ public class KafkaContainerInitializer extends InitializerBase<KafkaContainerWra
             .ifPresent(staticPort -> bindPort(container, staticPort, KafkaContainerWrapper.KAFKA_PORT));
 
         start(container);
-        String url = replaceHostAndPortPlaceholders(bootstrapServers,
-                                                    container.getContainerIpAddress(),
-                                                    container.getMappedPort(KafkaContainerWrapper.KAFKA_PORT));
+        String url = replaceHostAndPortPlaceholders(bootstrapServers, container, KafkaContainerWrapper.KAFKA_PORT);
 
         Optional.ofNullable(environment.getProperty("testcontainers.kafka.topics", String[].class))
                 .ifPresent(topics -> createTestKafkaTopics(url, topics));

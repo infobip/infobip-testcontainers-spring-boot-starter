@@ -12,7 +12,7 @@ import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.event.ContextClosedEvent;
-import org.testcontainers.containers.GenericContainer;
+import org.testcontainers.containers.Container;
 import org.testcontainers.lifecycle.Startable;
 
 public abstract class InitializerBase<C extends Startable>
@@ -21,7 +21,7 @@ public abstract class InitializerBase<C extends Startable>
     public static final String PORT_PLACEHOLDER = "<port>";
     public static final String HOST_PLACEHOLDER = "<host>";
 
-    protected static final Pattern JDBC_URL_WITH_PORT_GROUP_PATTERN = Pattern.compile(".*://.*:(\\d+)(/.*)?");
+    protected static final Pattern GENERIC_URL_WITH_PORT_GROUP_PATTERN = Pattern.compile(".*://.*:(\\d+)(/.*)?");
 
     private final AtomicReference<C> container = new AtomicReference<>();
 
@@ -38,9 +38,9 @@ public abstract class InitializerBase<C extends Startable>
         container.start();
     }
 
-    protected String replaceHostAndPortPlaceholders(String source, String host, Integer port) {
-        return source.replaceAll(HOST_PLACEHOLDER, host)
-                     .replaceAll(PORT_PLACEHOLDER, port.toString());
+    protected String replaceHostAndPortPlaceholders(String source, Container<?> container, Integer originalContainerPort) {
+        return source.replaceAll(HOST_PLACEHOLDER, container.getContainerIpAddress())
+                     .replaceAll(PORT_PLACEHOLDER, container.getMappedPort(originalContainerPort).toString());
     }
 
     protected Optional<Integer> resolveStaticPort(String connectionString, Pattern urlPatternWithPortGroup) {
@@ -59,7 +59,7 @@ public abstract class InitializerBase<C extends Startable>
                                 .findFirst();
     }
 
-    protected void bindPort(GenericContainer<?> container, Integer hostPort, Integer containerPort) {
+    protected void bindPort(Container<?> container, Integer hostPort, Integer containerPort) {
         container.setPortBindings(Collections.singletonList(hostPort + ":" + containerPort));
     }
 
