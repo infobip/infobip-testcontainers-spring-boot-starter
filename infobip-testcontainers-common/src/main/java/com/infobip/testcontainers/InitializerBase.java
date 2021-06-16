@@ -1,6 +1,7 @@
 package com.infobip.testcontainers;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Matcher;
@@ -11,6 +12,7 @@ import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.event.ContextClosedEvent;
+import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.lifecycle.Startable;
 
 public abstract class InitializerBase<C extends Startable>
@@ -37,8 +39,8 @@ public abstract class InitializerBase<C extends Startable>
     }
 
     protected String replaceHostAndPortPlaceholders(String source, String host, Integer port) {
-        return source.replace(HOST_PLACEHOLDER, host)
-                     .replace(PORT_PLACEHOLDER, port.toString());
+        return source.replaceAll(HOST_PLACEHOLDER, host)
+                     .replaceAll(PORT_PLACEHOLDER, port.toString());
     }
 
     protected Optional<Integer> resolveStaticPort(String connectionString, Pattern urlPatternWithPortGroup) {
@@ -55,6 +57,10 @@ public abstract class InitializerBase<C extends Startable>
                                     .map(Stream::of)
                                     .orElseGet(Stream::empty))
                                 .findFirst();
+    }
+
+    protected void bindPort(GenericContainer<?> container, Integer hostPort, Integer containerPort) {
+        container.setPortBindings(Collections.singletonList(hostPort + ":" + containerPort));
     }
 
 }

@@ -34,7 +34,7 @@ public class MSSQLServerContainerInitializer extends InitializerBase<MSSQLServer
                                                         .orElseGet(MSSQLServerContainerWrapper::new);
 
         resolveStaticPort(urlPropertyNameToValue.values(), JDBC_URL_WITH_PORT_GROUP_PATTERN)
-            .ifPresent(staticPort -> container.setPortBindings(Collections.singletonList(staticPort + ":" + MS_SQL_SERVER_PORT)));
+            .ifPresent(staticPort -> bindPort(container, staticPort, MS_SQL_SERVER_PORT));
 
         start(container);
         Map<String, String> replacedNameToValue = replaceHostAndPort(urlPropertyNameToValue, container);

@@ -23,7 +23,7 @@ public class ClickhouseContainerInitializer extends InitializerBase<ClickhouseCo
                                                        .orElseGet(ClickhouseContainerWrapper::new);
 
         resolveStaticPort(jdbcUrlValue, JDBC_URL_WITH_PORT_GROUP_PATTERN)
-            .ifPresent(staticPort -> container.setPortBindings(Collections.singletonList(staticPort + ":" + ClickhouseContainerWrapper.HTTP_PORT)));
+            .ifPresent(staticPort -> bindPort(container, staticPort, ClickhouseContainerWrapper.HTTP_PORT));
 
         start(container);
 

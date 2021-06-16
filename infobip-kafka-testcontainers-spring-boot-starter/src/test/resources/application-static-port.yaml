@@ -1,0 +1,7 @@
+spring:
+  kafka:
+    consumer:
+      groupId: test
+    bootstrap-servers: <host>:5000
+
+testcontainers.kafka.topics: test-topic:1:1
