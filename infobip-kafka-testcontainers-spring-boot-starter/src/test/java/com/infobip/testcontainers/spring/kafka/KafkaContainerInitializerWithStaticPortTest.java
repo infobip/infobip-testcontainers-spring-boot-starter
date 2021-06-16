@@ -42,7 +42,7 @@ class KafkaContainerInitializerWithStaticPortTest {
 
         // then
         then(actual).isNotNull();
-        Awaitility.await().atMost(Duration.ofSeconds(10)).until(() -> {
+        Awaitility.await().atMost(Duration.ofSeconds(30)).until(() -> {
             String value = listener.getValue();
 
             if(Objects.isNull(value)) {
