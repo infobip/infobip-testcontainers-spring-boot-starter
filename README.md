@@ -177,7 +177,7 @@ spring:
 Logical database is automatically created.
 Container IP address is resolved based on running host, meaning on local machine `<host>` will resolve to `localhost`
 while inside Docker placeholder will resolve to `containerIp`.
-Docker container is mapped on random port  so `<port>` placeholder is used and will be automatically substituted.
+When `<port>` placeholder is used, container will be mapped on random port and automatically substituted.
 
 <a name="PostgreSQLLocalDevelopment"></a>
 #### Local Development: 
@@ -250,7 +250,7 @@ spring:
 
 Container IP address is resolved based on running host, meaning on local machine `<host>` will resolve to `localhost`
 while inside Docker placeholder will resolve to `containerIp`.
-Docker container is mapped on random port so `<port>` placeholder is used and will be automatically substituted.
+When `<port>` placeholder is used, container will be mapped on random port and automatically substituted.
 
 <a name="RedisDevelopment"></a>
 #### Local Development: 
@@ -331,7 +331,7 @@ spring:
 Logical database is automatically created.
 Container IP address is resolved based on running host, meaning on local machine `<host>` will resolve to `localhost`
 while inside Docker placeholder will resolve to `containerIp`.
-Docker container is mapped on random port so `<port>` placeholder is used and will be automatically substituted.
+When `<port>` placeholder is used, container will be mapped on random port and automatically substituted.
 
 <a name="KafkaLocalDevelopment"></a>
 #### Local Development: 
