@@ -41,7 +41,6 @@ class KafkaContainerInitializerWithStaticPortTest {
                                                .get(10, TimeUnit.SECONDS);
 
         // then
-        then(kafkaProperties.getBootstrapServers()).containsExactly("localhost:5000");
         then(actual).isNotNull();
         Awaitility.await().atMost(Duration.ofSeconds(10)).until(() -> {
             String value = listener.getValue();
@@ -54,4 +53,11 @@ class KafkaContainerInitializerWithStaticPortTest {
             return true;
         });
     }
+
+    @Test
+    void shouldResolveHostInUrl() {
+        // then
+        then(kafkaProperties.getBootstrapServers()).containsExactly("localhost:5000");
+    }
+
 }

@@ -48,7 +48,7 @@ class MSSQLServerContainerInitializerWithStaticPortTest {
         String actual = environment.getProperty("spring.datasource.url");
 
         // then
-        then(actual).contains("localhost:1433");
+        then(actual).contains("localhost:5000");
     }
 
     @Test
@@ -57,7 +57,7 @@ class MSSQLServerContainerInitializerWithStaticPortTest {
         String actual = environment.getProperty("spring.r2dbc.url");
 
         // then
-        then(actual).contains("localhost:1433");
+        then(actual).contains("localhost:5000");
     }
 
     @Test
@@ -66,7 +66,7 @@ class MSSQLServerContainerInitializerWithStaticPortTest {
         String actual = environment.getProperty("spring.flyway.url");
 
         // then
-        then(actual).contains("localhost:1433");
+        then(actual).contains("localhost:5000");
     }
 
     private Driver getDriver(String jdbcUrl) {

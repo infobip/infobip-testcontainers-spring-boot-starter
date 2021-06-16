@@ -31,8 +31,13 @@ class ClickhouseContainerInitializerWithStaticPortTest {
         String result = jdbcTemplate.queryForObject("SELECT 1", String.class);
 
         //then
-        then(environment.getProperty(CLICKHOUSE_URL_PROPERTY_NAME)).isEqualTo("jdbc:clickhouse://localhost:5000");
         then(result).isEqualTo("1");
+    }
+
+    @Test
+    void shouldResolveHostInUrl() {
+        // then
+        then(environment.getProperty(CLICKHOUSE_URL_PROPERTY_NAME)).isEqualTo("jdbc:clickhouse://localhost:5000");
     }
 
 }
