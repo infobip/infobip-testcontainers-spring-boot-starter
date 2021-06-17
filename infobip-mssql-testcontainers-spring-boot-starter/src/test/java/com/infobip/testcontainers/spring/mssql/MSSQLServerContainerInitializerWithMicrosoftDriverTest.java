@@ -18,7 +18,7 @@ import static org.assertj.core.api.BDDAssertions.then;
 @ActiveProfiles("microsoft-driver")
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @SpringBootTest(classes = Main.class)
-class MicrosoftDriverSqlServerDockerTest {
+class MSSQLServerContainerInitializerWithMicrosoftDriverTest {
 
     private final Environment environment;
     private final DataSourceProperties properties;

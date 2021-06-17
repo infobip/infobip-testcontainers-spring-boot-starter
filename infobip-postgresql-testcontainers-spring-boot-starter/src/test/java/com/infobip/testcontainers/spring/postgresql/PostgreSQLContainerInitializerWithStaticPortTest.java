@@ -1,4 +1,10 @@
-package com.infobip.testcontainers.spring.mssql;
+package com.infobip.testcontainers.spring.postgresql;
+
+import static org.assertj.core.api.BDDAssertions.then;
+
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Test;
@@ -9,21 +15,16 @@ import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestConstructor;
 
-import java.sql.*;
-
-import static org.assertj.core.api.BDDAssertions.then;
-
 @AllArgsConstructor
-@ActiveProfiles("jtds")
+@ActiveProfiles("static-port")
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @SpringBootTest(classes = Main.class)
-class JtdsDriverSqlServerDockerTest {
+class PostgreSQLContainerInitializerWithStaticPortTest {
 
     private final DataSourceProperties properties;
 
     @Test
-    void shouldCreateDatabase() {
-
+    void shouldCreateContainer() {
         // given
         JdbcTemplate jdbcTemplate = new JdbcTemplate(new SimpleDriverDataSource(
                 getDriver(properties.getUrl()),
@@ -32,10 +33,19 @@ class JtdsDriverSqlServerDockerTest {
                 properties.getPassword()));
 
         // when
-        String actual = jdbcTemplate.queryForObject("SELECT db_name()", String.class);
+        String actual = jdbcTemplate.queryForObject("SELECT current_database();", String.class);
 
         // then
-        then(actual).isEqualTo("JtdsTestDatabase");
+        then(actual).isEqualTo("TestDatabase");
+    }
+
+    @Test
+    void shouldReplaceHostInJdbcUrl() {
+        // when
+        String actual = properties.getUrl();
+
+        // then
+        then(actual).contains("localhost:5004");
     }
 
     private Driver getDriver(String jdbcUrl) {

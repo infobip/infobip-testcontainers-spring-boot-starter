@@ -68,6 +68,12 @@
 			<email>igor.susic@infobip.com</email>
 			<organization>Infobip Ltd.</organization>
 		</developer>
+		<developer>
+			<id>tin-stavinoha</id>
+			<name>Tin Stavinoha</name>
+			<email>tin.stavinoha@infobip.com</email>
+			<organization>Infobip Ltd.</organization>
+		</developer>
 	</developers>
 
 	<properties>

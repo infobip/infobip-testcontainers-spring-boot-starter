@@ -2,24 +2,23 @@ package com.infobip.testcontainers.spring.clickhouse;
 
 import javax.sql.DataSource;
 
-import lombok.AllArgsConstructor;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import ru.yandex.clickhouse.ClickHouseDriver;
 
 @Configuration
-@AllArgsConstructor
 public class DataSourceConfig {
 
-    private final Environment environment;
+    static final String CLICKHOUSE_URL_PROPERTY_NAME = "spring.datasource.clickhouse.jdbc-url";
 
     @Bean
-    public DataSource getDataSource() {
-        String url = environment.getProperty("spring.datasource.clickhouse.jdbc-url");
-        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
-        dataSourceBuilder.driverClassName("ru.yandex.clickhouse.ClickHouseDriver");
-        dataSourceBuilder.url(url);
-        return dataSourceBuilder.build();
+    public DataSource getDataSource(Environment environment) {
+        return DataSourceBuilder.create()
+                                .driverClassName(ClickHouseDriver.class.getName())
+                                .url(environment.getProperty(CLICKHOUSE_URL_PROPERTY_NAME))
+                                .build();
     }
+
 }

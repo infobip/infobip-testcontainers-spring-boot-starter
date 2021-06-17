@@ -1,14 +1,20 @@
 package com.infobip.testcontainers.spring.mssql;
 
+import static org.testcontainers.containers.MSSQLServerContainer.MS_SQL_SERVER_PORT;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import com.infobip.testcontainers.InitializerBase;
 import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
-
-import java.util.*;
-import java.util.stream.Collectors;
-
-import static org.testcontainers.containers.MSSQLServerContainer.MS_SQL_SERVER_PORT;
 
 public class MSSQLServerContainerInitializer extends InitializerBase<MSSQLServerContainerWrapper> {
 
@@ -23,31 +29,31 @@ public class MSSQLServerContainerInitializer extends InitializerBase<MSSQLServer
         Map<String, String> urlPropertyNameToValue = getUrlPropertyNameToValue(environment, urlPropertyNames);
 
         MSSQLServerContainerWrapper container = Optional.ofNullable(
-                environment.getProperty("testcontainers.mssql.docker.image"))
+            environment.getProperty("testcontainers.mssql.docker.image"))
                                                         .map(MSSQLServerContainerWrapper::new)
                                                         .orElseGet(MSSQLServerContainerWrapper::new);
+
+        resolveStaticPort(urlPropertyNameToValue.values(), GENERIC_URL_WITH_PORT_GROUP_PATTERN)
+            .ifPresent(staticPort -> bindPort(container, staticPort, MS_SQL_SERVER_PORT));
+
         start(container);
         Map<String, String> replacedNameToValue = replaceHostAndPort(urlPropertyNameToValue, container);
         Map<String, String> testPropertyValues = addMissingUsernameAndPassword(replacedNameToValue, container);
         TestPropertyValues values = TestPropertyValues.of(testPropertyValues);
 
         values.applyTo(applicationContext);
-        String url = replacedNameToValue.getOrDefault("spring.datasource.url",
-                                                      replacedNameToValue.get("spring.flyway.url"));
+        String url = replacedNameToValue.getOrDefault("spring.datasource.url", replacedNameToValue.get("spring.flyway.url"));
         DatabaseCreator creator = new DatabaseCreator(url, container.getUsername(), container.getPassword());
         creator.createDatabaseIfItDoesntExist();
     }
 
     private List<String> getUrlPropertyNames(Environment environment) {
-
         String name = environment.getProperty("testcontainers.mssql.datasource.url.property.name");
-
         if (Objects.nonNull(name)) {
             return Collections.singletonList(name);
         }
 
         String[] names = environment.getProperty("testcontainers.mssql.datasource.url.property.names", String[].class);
-
         if (Objects.nonNull(names)) {
             return Arrays.asList(names);
         }
@@ -56,7 +62,6 @@ public class MSSQLServerContainerInitializer extends InitializerBase<MSSQLServer
     }
 
     private Map<String, String> getUrlPropertyNameToValue(Environment environment, List<String> names) {
-
         Map<String, String> propertyNameToValue = new HashMap<>();
 
         for (String name : names) {
@@ -71,13 +76,10 @@ public class MSSQLServerContainerInitializer extends InitializerBase<MSSQLServer
 
     private Map<String, String> replaceHostAndPort(Map<String, String> urlPropertyNameToValue,
                                                    MSSQLServerContainerWrapper container) {
-        String host = container.getContainerIpAddress();
-        String port = container.getMappedPort(MS_SQL_SERVER_PORT).toString();
         return urlPropertyNameToValue.entrySet()
                                      .stream()
                                      .collect(Collectors.toMap(Map.Entry::getKey,
-                                                               entry -> entry.getValue().replace("<host>", host)
-                                                                             .replace("<port>", port)));
+                                                               entry -> replaceHostAndPortPlaceholders(entry.getValue(), container, MS_SQL_SERVER_PORT)));
     }
 
     private Map<String, String> addMissingUsernameAndPassword(Map<String, String> urlPropertyNameToValue,
@@ -96,4 +98,5 @@ public class MSSQLServerContainerInitializer extends InitializerBase<MSSQLServer
         }
         return testPropertyValues;
     }
+
 }

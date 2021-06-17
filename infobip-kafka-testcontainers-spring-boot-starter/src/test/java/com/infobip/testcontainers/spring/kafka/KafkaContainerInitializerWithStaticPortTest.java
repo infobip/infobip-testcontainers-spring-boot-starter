@@ -11,6 +11,7 @@ import java.util.concurrent.TimeoutException;
 
 import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
@@ -18,13 +19,14 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestConstructor;
 
 @AllArgsConstructor
-@ActiveProfiles("test")
+@ActiveProfiles("static-port")
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @SpringBootTest(classes = Main.class)
-class KafkaContainerInitializerTest {
+class KafkaContainerInitializerWithStaticPortTest {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final Listener listener;
+    private final KafkaProperties kafkaProperties;
 
     @Test
     void shouldCreateContainer() throws InterruptedException, ExecutionException, TimeoutException {
@@ -40,6 +42,12 @@ class KafkaContainerInitializerTest {
         then(actual).isNotNull();
         await().atMost(Duration.ofSeconds(10))
                .untilAsserted(() -> then(listener.getValue()).isEqualTo(givenValue));
+    }
+
+    @Test
+    void shouldResolveHostInUrl() {
+        // then
+        then(kafkaProperties.getBootstrapServers()).containsExactly("localhost:5002");
     }
 
 }
