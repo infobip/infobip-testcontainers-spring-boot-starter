@@ -35,7 +35,7 @@ class KafkaContainerInitializerTest {
         // when
         SendResult<?, ?> actual = kafkaTemplate.send(TOPIC_NAME, "key", givenValue)
                                                .completable()
-                                               .get(30, TimeUnit.SECONDS);
+                                               .get(10, TimeUnit.SECONDS);
 
         // then
         then(actual).isNotNull();
