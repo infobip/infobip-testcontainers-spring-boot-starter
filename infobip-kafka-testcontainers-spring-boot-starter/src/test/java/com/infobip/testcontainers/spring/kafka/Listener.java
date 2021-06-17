@@ -1,13 +1,11 @@
 package com.infobip.testcontainers.spring.kafka;
 
+import java.util.concurrent.atomic.AtomicReference;
+
 import lombok.AllArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
-
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.atomic.AtomicReference;
 
 @AllArgsConstructor
 @Component
@@ -23,4 +21,5 @@ class Listener {
     String getValue() {
         return value.get();
     }
+
 }

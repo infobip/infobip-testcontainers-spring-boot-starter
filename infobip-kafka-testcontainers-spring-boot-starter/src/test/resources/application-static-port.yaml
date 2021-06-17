@@ -1,7 +1,8 @@
 spring:
   kafka:
     consumer:
-      groupId: test
-    bootstrap-servers: <host>:5000
+      groupId: static
+      autoOffsetReset: earliest
+    bootstrap-servers: <host>:5001
 
 testcontainers.kafka.topics: test-topic:1:1

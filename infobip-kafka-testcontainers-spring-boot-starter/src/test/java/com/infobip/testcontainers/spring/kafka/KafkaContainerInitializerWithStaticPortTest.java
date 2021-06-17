@@ -1,15 +1,14 @@
 package com.infobip.testcontainers.spring.kafka;
 
 import static org.assertj.core.api.BDDAssertions.then;
+import static org.awaitility.Awaitility.await;
 
 import java.time.Duration;
-import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import lombok.AllArgsConstructor;
-import org.awaitility.Awaitility;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,31 +32,23 @@ class KafkaContainerInitializerWithStaticPortTest {
     @Test
     void shouldCreateContainer() throws InterruptedException, ExecutionException, TimeoutException {
         // given
-        String givenData = "givenData";
+        String givenValue = this.getClass().getName();
 
         // when
-        SendResult<?, ?> actual = kafkaTemplate.send(TOPIC_NAME, "key", givenData)
+        SendResult<?, ?> actual = kafkaTemplate.send(TOPIC_NAME, "key", givenValue)
                                                .completable()
                                                .get(30, TimeUnit.SECONDS);
 
         // then
         then(actual).isNotNull();
-        Awaitility.await().atMost(Duration.ofSeconds(30)).until(() -> {
-            String value = listener.getValue();
-
-            if(Objects.isNull(value)) {
-                return false;
-            }
-
-            then(value).isEqualTo(givenData);
-            return true;
-        });
+        await().atMost(Duration.ofSeconds(10))
+               .untilAsserted(() -> then(listener.getValue()).isEqualTo(givenValue));
     }
 
     @Test
     void shouldResolveHostInUrl() {
         // then
-        then(kafkaProperties.getBootstrapServers()).containsExactly("localhost:5000");
+        then(kafkaProperties.getBootstrapServers()).containsExactly("localhost:5001");
     }
 
 }
