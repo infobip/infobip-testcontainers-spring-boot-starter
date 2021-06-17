@@ -1,5 +1,6 @@
 package com.infobip.testcontainers.spring.kafka;
 
+import static com.infobip.testcontainers.spring.kafka.Listener.TOPIC;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.awaitility.Awaitility.await;
 
@@ -22,8 +23,6 @@ import org.springframework.test.context.TestConstructor;
 @SpringBootTest(classes = Main.class)
 class KafkaContainerInitializerTest {
 
-    final static String TOPIC_NAME = "test-topic";
-
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final Listener listener;
 
@@ -33,7 +32,7 @@ class KafkaContainerInitializerTest {
         String givenValue = this.getClass().getName();
 
         // when
-        SendResult<?, ?> actual = kafkaTemplate.send(TOPIC_NAME, "key", givenValue)
+        SendResult<?, ?> actual = kafkaTemplate.send(TOPIC, "key", givenValue)
                                                .completable()
                                                .get(10, TimeUnit.SECONDS);
 

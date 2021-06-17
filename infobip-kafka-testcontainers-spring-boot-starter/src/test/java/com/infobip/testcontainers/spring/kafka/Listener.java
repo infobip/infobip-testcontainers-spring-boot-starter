@@ -11,9 +11,11 @@ import org.springframework.stereotype.Component;
 @Component
 class Listener {
 
+    public static final String TOPIC = "test-topic";
+
     private final AtomicReference<String> value = new AtomicReference<>();
 
-    @KafkaListener(topics = KafkaContainerInitializerTest.TOPIC_NAME)
+    @KafkaListener(topics = TOPIC)
     public void handle(@Payload String value) {
         this.value.set(value);
     }
