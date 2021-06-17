@@ -48,7 +48,7 @@ class KafkaContainerInitializerWithStaticPortTest {
     @Test
     void shouldResolveHostInUrl() {
         // then
-        then(kafkaProperties.getBootstrapServers()).containsExactly("localhost:5001");
+        then(kafkaProperties.getBootstrapServers()).containsExactly("localhost:5002");
     }
 
 }

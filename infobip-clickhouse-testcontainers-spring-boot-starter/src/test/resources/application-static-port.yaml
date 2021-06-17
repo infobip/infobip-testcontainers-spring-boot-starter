@@ -1,7 +1,7 @@
 spring:
   datasource:
     clickhouse:
-        jdbc-url: jdbc:clickhouse://<host>:5000
+        jdbc-url: jdbc:clickhouse://<host>:5001
 
 testcontainers:
         clickhouse:

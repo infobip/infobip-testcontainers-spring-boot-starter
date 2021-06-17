@@ -37,7 +37,7 @@ class RedisContainerInitializerWithStaticPortTest {
     @Test
     void shouldSetHostInProperties() {
         // then
-        then(redisProperties.getUrl()).contains("localhost:5000");
+        then(redisProperties.getUrl()).contains("localhost:5006");
     }
 
 }

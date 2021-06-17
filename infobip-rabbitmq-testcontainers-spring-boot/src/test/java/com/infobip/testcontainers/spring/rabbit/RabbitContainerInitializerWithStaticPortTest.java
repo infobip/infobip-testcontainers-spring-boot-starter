@@ -40,7 +40,7 @@ class RabbitContainerInitializerWithStaticPortTest {
     @Test
     void shouldUseStaticPort() {
         // then
-        then(rabbitProperties.getAddresses()).contains("localhost:5000");
+        then(rabbitProperties.getAddresses()).contains("localhost:5005");
     }
 
 }

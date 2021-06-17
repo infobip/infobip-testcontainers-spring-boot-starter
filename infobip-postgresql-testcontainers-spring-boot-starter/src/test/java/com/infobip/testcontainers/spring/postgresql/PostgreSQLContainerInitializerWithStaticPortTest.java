@@ -45,7 +45,7 @@ class PostgreSQLContainerInitializerWithStaticPortTest {
         String actual = properties.getUrl();
 
         // then
-        then(actual).contains("localhost:5000");
+        then(actual).contains("localhost:5004");
     }
 
     private Driver getDriver(String jdbcUrl) {

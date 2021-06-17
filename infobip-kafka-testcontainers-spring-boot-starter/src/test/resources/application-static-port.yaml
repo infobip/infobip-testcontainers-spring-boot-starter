@@ -3,6 +3,6 @@ spring:
     consumer:
       groupId: static
       autoOffsetReset: earliest
-    bootstrap-servers: <host>:5001
+    bootstrap-servers: <host>:5002
 
 testcontainers.kafka.topics: test-topic:1:1
