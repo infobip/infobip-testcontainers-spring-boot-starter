@@ -1,3 +1,6 @@
+### 3.4.0
+* upgraded to spring-boot-dependencies 2.6.2 and testcontainers 1.16.2
+
 ### 3.3.0
 General:
 * Added support for starting containers on a predefined port
