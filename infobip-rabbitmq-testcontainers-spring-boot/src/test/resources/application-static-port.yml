@@ -1,5 +1,5 @@
 spring:
   rabbitmq:
     port: 5005
-    docker:
-      image: rabbitmq:3.6.14-alpine
+
+testcontainers.rabbit.docker.image: rabbitmq:3.6.14-alpine
