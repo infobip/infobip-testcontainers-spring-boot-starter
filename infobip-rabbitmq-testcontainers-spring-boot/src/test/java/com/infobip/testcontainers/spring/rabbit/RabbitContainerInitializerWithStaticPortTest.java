@@ -30,11 +30,10 @@ class RabbitContainerInitializerWithStaticPortTest {
         String givenMessage = "test";
 
         // when
-        Throwable actual = BDDAssertions.catchThrowable(
-                () -> rabbitTemplate.convertAndSend("test.exchange", "test.key.bar", givenMessage));
+        rabbitTemplate.convertAndSend("test.exchange", "test.key.bar", givenMessage);
 
         // then
-        then(actual).isNull();
+//        then(actual).isNull();
     }
 
     @Test
