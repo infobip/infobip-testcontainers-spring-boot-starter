@@ -78,7 +78,7 @@
 
 	<properties>
 		<!-- DEPENDENCY VERSIONS -->
-		<spring-boot.version>2.6.7</spring-boot.version>
+		<spring-boot.version>2.7.0</spring-boot.version>
 
 		<testcontainers.version>1.17.2</testcontainers.version>
 

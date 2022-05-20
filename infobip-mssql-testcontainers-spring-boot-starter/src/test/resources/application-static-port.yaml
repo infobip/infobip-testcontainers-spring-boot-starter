@@ -1,7 +1,7 @@
 spring:
   datasource:
-    url: jdbc:sqlserver://<host>:5003;database=MicrosoftDriverTestDatabase
+    url: jdbc:sqlserver://<host>:5003;database=MicrosoftDriverTestDatabase;trustServerCertificate=true
   r2dbc:
-    url: r2dbc:pool:mssql://<host>:5003/InfobipSpringDataJdbcQuerydslTest
+    url: r2dbc:pool:mssql://<host>:5003/InfobipSpringDataJdbcQuerydslTest;trustServerCertificate=true
   flyway:
-    url: jdbc:sqlserver://<host>:5003;database=MicrosoftDriverTestDatabase
+    url: jdbc:sqlserver://<host>:5003;database=MicrosoftDriverTestDatabase;trustServerCertificate=true

@@ -1,12 +1,15 @@
 package com.infobip.testcontainers.spring.mssql;
 
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.SimpleDriverDataSource;
-
-import java.sql.*;
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 class DatabaseCreator {
 
@@ -23,7 +26,8 @@ class DatabaseCreator {
             throw new IllegalArgumentException(url + " does not match " + databaseUrlPattern);
         }
 
-        String jdbcBaseUrl = matcher.group("jdbcBaseUrl");
+        String otherParameters = Optional.ofNullable(matcher.group("otherParameters")).orElse("");
+        String jdbcBaseUrl = matcher.group("jdbcBaseUrl") + otherParameters;
         String databaseName = matcher.group("databaseName");
         databaseExistsQuery = String.format("SELECT count(*) FROM sys.databases WHERE name='%s'", databaseName);
         createDatabaseQuery = String.format("CREATE DATABASE %s", databaseName);
@@ -34,10 +38,10 @@ class DatabaseCreator {
     private String getDatabaseUrlPattern(String url) {
 
         if (url.startsWith("jdbc:jtds")) {
-            return "(?<jdbcBaseUrl>.*)/(?<databaseName>.*)";
+            return "(?<jdbcBaseUrl>.*)/(?<databaseName>[^;]*);?(?<otherParameters>.*)";
         }
 
-        return "(?<jdbcBaseUrl>.*);database=(?<databaseName>.*)";
+        return "(?<jdbcBaseUrl>.*);database=(?<databaseName>[^;]*)(?<otherParameters>;.*)?";
     }
 
     void createDatabaseIfItDoesntExist() {
