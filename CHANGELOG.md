@@ -1,4 +1,4 @@
-### 3.4.0
+### 3.5.0
 * upgraded to spring-boot-dependencies 2.7.0 and testcontainers 1.17.1
 * fixed DatabaseCreator to support mssql-jdbc with encrypted flag set to true (which is now the default behavior in upgraded version)
 
