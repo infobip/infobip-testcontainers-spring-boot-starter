@@ -28,7 +28,7 @@ public class RabbitContainerInitializer extends InitializerBase<RabbitContainerW
         start(container);
 
         TestPropertyValues values = TestPropertyValues.of(
-            String.format("spring.rabbitmq.addresses=%s:%d", container.getContainerIpAddress(),
+            String.format("spring.rabbitmq.addresses=%s:%d", container.getHost(),
                           container.getMappedPort(PORT)));
         values.applyTo(configurableApplicationContext);
     }

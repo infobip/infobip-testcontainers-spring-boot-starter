@@ -39,7 +39,7 @@ public abstract class InitializerBase<C extends Startable>
     }
 
     protected String replaceHostAndPortPlaceholders(String source, Container<?> container, Integer originalContainerPort) {
-        return source.replaceAll(HOST_PLACEHOLDER, container.getContainerIpAddress())
+        return source.replaceAll(HOST_PLACEHOLDER, container.getHost())
                      .replaceAll(PORT_PLACEHOLDER, container.getMappedPort(originalContainerPort).toString());
     }
 
