@@ -39,7 +39,7 @@
 		<module>infobip-kafka-testcontainers-spring-boot-starter</module>
 		<module>infobip-redis-testcontainers-spring-boot-starter</module>
 		<module>infobip-testcontainers-common</module>
-        <module>infobip-rabbitmq-testcontainers-spring-boot</module>
+        <module>infobip-rabbitmq-testcontainers-spring-boot-starter</module>
 		<module>infobip-clickhouse-testcontainers-spring-boot-starter</module>
     </modules>
 

@@ -7,7 +7,7 @@
 	    <version>3.5.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>infobip-rabbitmq-testcontainers-spring-boot</artifactId>
+    <artifactId>infobip-rabbitmq-testcontainers-spring-boot-starter</artifactId>
 
     <dependencies>
 		<dependency>
