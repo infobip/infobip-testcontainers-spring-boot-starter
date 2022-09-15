@@ -1,5 +1,7 @@
 package com.infobip.testcontainers.spring.rabbit;
 
+import static org.springframework.amqp.core.BindingBuilder.bind;
+
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.QueueBuilder;
@@ -7,8 +9,6 @@ import org.springframework.amqp.core.TopicExchange;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
-
-import static org.springframework.amqp.core.BindingBuilder.bind;
 
 @SpringBootApplication
 public class Main {

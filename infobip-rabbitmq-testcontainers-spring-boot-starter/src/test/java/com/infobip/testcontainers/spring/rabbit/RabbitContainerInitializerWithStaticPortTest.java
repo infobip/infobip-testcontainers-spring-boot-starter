@@ -3,7 +3,6 @@ package com.infobip.testcontainers.spring.rabbit;
 import static org.assertj.core.api.BDDAssertions.then;
 
 import lombok.AllArgsConstructor;
-import org.assertj.core.api.BDDAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

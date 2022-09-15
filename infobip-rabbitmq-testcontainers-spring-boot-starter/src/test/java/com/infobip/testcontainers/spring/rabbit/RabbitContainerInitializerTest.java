@@ -1,5 +1,7 @@
 package com.infobip.testcontainers.spring.rabbit;
 
+import static org.assertj.core.api.BDDAssertions.then;
+
 import lombok.AllArgsConstructor;
 import org.assertj.core.api.BDDAssertions;
 import org.junit.jupiter.api.DisplayName;
@@ -9,8 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestConstructor;
-
-import static org.assertj.core.api.BDDAssertions.then;
 
 @AllArgsConstructor
 @ActiveProfiles("test")
