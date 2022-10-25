@@ -33,7 +33,6 @@ class KafkaContainerInitializerTest {
 
         // when
         SendResult<?, ?> actual = kafkaTemplate.send(TOPIC, "key", givenValue)
-                                               .completable()
                                                .get(10, TimeUnit.SECONDS);
 
         // then
