@@ -78,23 +78,22 @@
 
 	<properties>
 		<!-- DEPENDENCY VERSIONS -->
-		<spring-boot.version>2.7.1</spring-boot.version>
+		<spring-boot.version>3.0.0-RC1</spring-boot.version>
 
 		<testcontainers.version>1.17.3</testcontainers.version>
 
 		<!-- PLUGIN VERSIONS -->
-		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
-		<cobertura-maven-plugin.version>2.7</cobertura-maven-plugin.version>
+		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 		<coveralls-maven-plugin.version>4.3.0</coveralls-maven-plugin.version>
-		<jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
+		<jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
 		<maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
 		<maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>
-		<maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-		<maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
+		<maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+		<maven-failsafe-plugin.version>3.0.0-M5</maven-failsafe-plugin.version>
 
 		<!-- OTHER PROPERTIES -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.8</java.version>
+		<java.version>17</java.version>
 	</properties>
 
 	<dependencyManagement>
@@ -164,8 +163,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
+					<release>${java.version}</release>
 					<compilerArgument>-parameters</compilerArgument>
 					<testCompilerArgument>-parameters</testCompilerArgument>
 					<encoding>utf8</encoding>
