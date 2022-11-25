@@ -17,7 +17,7 @@ public class RedisContainerInitializer extends InitializerBase<RedisContainerWra
         RedisContainerWrapper container = Optional.ofNullable(
             environment.getProperty("testcontainers.redis.docker.image"))
                                                   .map(RedisContainerWrapper::new)
-                                                  .orElseGet(() -> new RedisContainerWrapper("redis:5.0.7-alpine"));
+                                                  .orElseGet(() -> new RedisContainerWrapper("redis:6.2.6-alpine"));
         resolveStaticPort(redisUrl, GENERIC_URL_WITH_PORT_GROUP_PATTERN)
             .ifPresent(staticPort -> bindPort(container, staticPort, RedisContainerWrapper.PORT));
 
