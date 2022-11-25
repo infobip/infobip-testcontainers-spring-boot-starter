@@ -7,7 +7,7 @@ public class RedisContainerWrapper extends GenericContainer<RedisContainerWrappe
     public static final int PORT = 6379;
 
     public RedisContainerWrapper() {
-        this("redis:5.0.7-alpine");
+        this("redis:6.2.6-alpine");
     }
 
     public RedisContainerWrapper(String dockerImageName) {

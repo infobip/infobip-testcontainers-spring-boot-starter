@@ -3,6 +3,7 @@ package com.infobip.testcontainers.spring.rabbit;
 import static org.assertj.core.api.BDDAssertions.then;
 
 import lombok.AllArgsConstructor;
+import org.assertj.core.api.BDDAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -29,10 +30,11 @@ class RabbitContainerInitializerWithStaticPortTest {
         String givenMessage = "test";
 
         // when
-        rabbitTemplate.convertAndSend("test.exchange", "test.key.bar", givenMessage);
+        Throwable actual = BDDAssertions.catchThrowable(
+            () -> rabbitTemplate.convertAndSend("test.exchange", "test.key.bar", givenMessage));
 
         // then
-//        then(actual).isNull();
+        then(actual).isNull();
     }
 
     @Test

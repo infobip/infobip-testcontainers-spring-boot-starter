@@ -1,3 +1,4 @@
 spring:
-    redis:
-        url: redis://<host>:5006
+    data:
+        redis:
+            url: redis://<host>:5006
