@@ -13,7 +13,7 @@ public class RedisContainerInitializer extends InitializerBase<RedisContainerWra
     @Override
     public void initialize(ConfigurableApplicationContext applicationContext) {
         Environment environment = applicationContext.getEnvironment();
-        String redisUrl = Objects.requireNonNull(environment.getProperty("spring.redis.url"));
+        String redisUrl = Objects.requireNonNull(environment.getProperty("spring.data.redis.url"));
         RedisContainerWrapper container = Optional.ofNullable(
             environment.getProperty("testcontainers.redis.docker.image"))
                                                   .map(RedisContainerWrapper::new)
@@ -24,7 +24,7 @@ public class RedisContainerInitializer extends InitializerBase<RedisContainerWra
         start(container);
 
         String url = replaceHostAndPortPlaceholders(redisUrl, container, RedisContainerWrapper.PORT);
-        TestPropertyValues values = TestPropertyValues.of("spring.redis.url=" + url);
+        TestPropertyValues values = TestPropertyValues.of("spring.data.redis.url=" + url);
         values.applyTo(applicationContext);
     }
 
