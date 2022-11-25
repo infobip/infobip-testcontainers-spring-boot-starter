@@ -1,3 +1,4 @@
 spring:
-  redis:
-    url: redis://<host>:<port>
+    data:
+        redis:
+            url: redis://<host>:<port>
