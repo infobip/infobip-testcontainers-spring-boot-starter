@@ -1,3 +1,7 @@
+### 4.0.0
+
+* upgraded to Spring Boot 3.0.0 and testcontainers 1.17.6
+
 ### 3.5.1
 * renamed infobip-rabbitmq-testcontainers-spring-boot module to infobip-rabbitmq-testcontainers-spring-boot-starter
 
