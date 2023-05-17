@@ -3,5 +3,3 @@ spring:
     url: jdbc:postgresql://<host>:5004/TestDatabase
     username: test
     password: test
-
-testcontainers.postgresql.docker.image: postgres:10
