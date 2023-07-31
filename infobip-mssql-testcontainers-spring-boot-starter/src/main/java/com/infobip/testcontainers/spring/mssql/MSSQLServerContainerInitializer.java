@@ -33,6 +33,9 @@ public class MSSQLServerContainerInitializer extends InitializerBase<MSSQLServer
                                                         .map(MSSQLServerContainerWrapper::new)
                                                         .orElseGet(MSSQLServerContainerWrapper::new);
 
+        Optional<MSSQLServerContainerWrapper> initScript = Optional.ofNullable(
+                environment.getProperty("testcontainers.mssql.init-script")).map(container::withInitScript);
+
         resolveStaticPort(urlPropertyNameToValue.values(), GENERIC_URL_WITH_PORT_GROUP_PATTERN)
             .ifPresent(staticPort -> bindPort(container, staticPort, MS_SQL_SERVER_PORT));
 
@@ -42,9 +45,11 @@ public class MSSQLServerContainerInitializer extends InitializerBase<MSSQLServer
         TestPropertyValues values = TestPropertyValues.of(testPropertyValues);
 
         values.applyTo(applicationContext);
-        String url = replacedNameToValue.getOrDefault("spring.datasource.url", replacedNameToValue.get("spring.flyway.url"));
-        DatabaseCreator creator = new DatabaseCreator(url, container.getUsername(), container.getPassword());
-        creator.createDatabaseIfItDoesntExist();
+        if (initScript.isEmpty()) {
+            String url = replacedNameToValue.getOrDefault("spring.datasource.url", replacedNameToValue.get("spring.flyway.url"));
+            DatabaseCreator creator = new DatabaseCreator(url, container.getUsername(), container.getPassword());
+            creator.createDatabaseIfItDoesNotExist();
+        }
     }
 
     private List<String> getUrlPropertyNames(Environment environment) {

@@ -9,11 +9,6 @@
 
 	<artifactId>infobip-postgresql-testcontainers-spring-boot-starter</artifactId>
 
-	<properties>
-		<!-- DEPENDENCY VERSIONS -->
-		<mssqlserver.version>1.9.1</mssqlserver.version>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>

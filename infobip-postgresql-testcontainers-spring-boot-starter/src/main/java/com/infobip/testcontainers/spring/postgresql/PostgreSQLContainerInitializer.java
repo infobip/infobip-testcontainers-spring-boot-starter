@@ -27,6 +27,8 @@ public class PostgreSQLContainerInitializer extends InitializerBase<PostgreSQLCo
                                                        .map(imageName -> new PostgreSQLContainerWrapper(database, imageName))
                                                        .orElseGet(() -> new PostgreSQLContainerWrapper(database));
 
+        Optional.ofNullable(environment.getProperty("testcontainers.postgresql.init-script")).ifPresent(container::withInitScript);
+
         resolveStaticPort(dataSourceUrl, GENERIC_URL_WITH_PORT_GROUP_PATTERN)
             .ifPresent(staticPort -> bindPort(container, staticPort, PostgreSQLContainerWrapper.POSTGRESQL_PORT));
 

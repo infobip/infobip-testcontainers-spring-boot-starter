@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://<host>:<port>/
+    username: test
+    password: test
+
+testcontainers:
+  postgresql:
+    init-script: db/init-script.sql

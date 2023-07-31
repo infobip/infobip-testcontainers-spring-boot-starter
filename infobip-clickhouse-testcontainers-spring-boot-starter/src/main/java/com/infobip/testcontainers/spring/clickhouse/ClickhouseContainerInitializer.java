@@ -21,6 +21,8 @@ public class ClickhouseContainerInitializer extends InitializerBase<ClickhouseCo
                                                        .map(ClickhouseContainerWrapper::new)
                                                        .orElseGet(ClickhouseContainerWrapper::new);
 
+        Optional.ofNullable(environment.getProperty("testcontainers.clickhouse.init-script")).ifPresent(container::withInitScript);
+
         resolveStaticPort(jdbcUrlValue, GENERIC_URL_WITH_PORT_GROUP_PATTERN)
             .ifPresent(staticPort -> bindPort(container, staticPort, ClickhouseContainerWrapper.HTTP_PORT));
 
@@ -28,8 +30,7 @@ public class ClickhouseContainerInitializer extends InitializerBase<ClickhouseCo
 
         String url = replaceHostAndPortPlaceholders(jdbcUrlValue, container, ClickhouseContainerWrapper.HTTP_PORT);
 
-        TestPropertyValues values = TestPropertyValues.of(
-            String.format("%s=%s", jdbcUrlPropertyPath, url));
+        TestPropertyValues values = TestPropertyValues.of(String.format("%s=%s", jdbcUrlPropertyPath, url));
         values.applyTo(applicationContext);
     }
 

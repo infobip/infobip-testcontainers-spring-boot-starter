@@ -10,7 +10,7 @@
 	<artifactId>infobip-clickhouse-testcontainers-spring-boot-starter</artifactId>
 
 	<properties>
-		<clickhouse-jdbc.version>0.2.4</clickhouse-jdbc.version>
+		<clickhouse-jdbc.version>0.3.2</clickhouse-jdbc.version>
 	</properties>
 
 	<dependencies>
@@ -31,15 +31,16 @@
 			<artifactId>clickhouse</artifactId>
 			<version>${testcontainers.version}</version>
 		</dependency>
+
 		<dependency>
-			<groupId>ru.yandex.clickhouse</groupId>
+			<groupId>com.clickhouse</groupId>
 			<artifactId>clickhouse-jdbc</artifactId>
 			<version>${clickhouse-jdbc.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
-
 	</dependencies>
 </project>

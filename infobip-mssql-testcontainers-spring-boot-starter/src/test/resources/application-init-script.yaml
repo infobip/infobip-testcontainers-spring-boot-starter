@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:jtds:sqlserver://<host>:<port>/JtdsTestDatabase
+
+testcontainers:
+  mssql:
+    init-script: db/init-script.sql

@@ -55,4 +55,5 @@ class PostgreSQLContainerInitializerWithStaticPortTest {
             throw new IllegalArgumentException(e);
         }
     }
+
 }

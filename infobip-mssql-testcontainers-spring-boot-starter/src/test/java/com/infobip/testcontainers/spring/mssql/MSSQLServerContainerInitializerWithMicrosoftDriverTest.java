@@ -25,7 +25,6 @@ class MSSQLServerContainerInitializerWithMicrosoftDriverTest {
 
     @Test
     void shouldCreateContainer() {
-
         // given
         JdbcTemplate jdbcTemplate = new JdbcTemplate(new SimpleDriverDataSource(
                 getDriver(properties.getUrl()),
@@ -42,7 +41,6 @@ class MSSQLServerContainerInitializerWithMicrosoftDriverTest {
 
     @Test
     void shouldInsertUsername() {
-
         // when
         String actual = properties.getUsername();
 
@@ -52,7 +50,6 @@ class MSSQLServerContainerInitializerWithMicrosoftDriverTest {
 
     @Test
     void shouldInsertPassword() {
-
        // when
         String actual = properties.getPassword();
 
