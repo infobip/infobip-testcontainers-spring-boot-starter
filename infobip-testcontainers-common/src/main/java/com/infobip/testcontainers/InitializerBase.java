@@ -6,7 +6,6 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ApplicationListener;
@@ -53,9 +52,8 @@ public abstract class InitializerBase<C extends Startable>
 
     protected Optional<Integer> resolveStaticPort(Collection<String> connectionStrings, Pattern urlPatternWithPortGroup) {
         return connectionStrings.stream()
-                                .flatMap(connectionString -> resolveStaticPort(connectionString, urlPatternWithPortGroup)
-                                    .map(Stream::of)
-                                    .orElseGet(Stream::empty))
+                                .flatMap(connectionString -> resolveStaticPort(connectionString,
+                                        urlPatternWithPortGroup).stream())
                                 .findFirst();
     }
 

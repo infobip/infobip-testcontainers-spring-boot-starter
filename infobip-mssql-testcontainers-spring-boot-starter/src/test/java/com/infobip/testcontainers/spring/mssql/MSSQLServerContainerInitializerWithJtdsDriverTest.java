@@ -23,7 +23,6 @@ class MSSQLServerContainerInitializerWithJtdsDriverTest {
 
     @Test
     void shouldCreateDatabase() {
-
         // given
         JdbcTemplate jdbcTemplate = new JdbcTemplate(new SimpleDriverDataSource(
                 getDriver(properties.getUrl()),
@@ -45,4 +44,5 @@ class MSSQLServerContainerInitializerWithJtdsDriverTest {
             throw new IllegalArgumentException(e);
         }
     }
+
 }

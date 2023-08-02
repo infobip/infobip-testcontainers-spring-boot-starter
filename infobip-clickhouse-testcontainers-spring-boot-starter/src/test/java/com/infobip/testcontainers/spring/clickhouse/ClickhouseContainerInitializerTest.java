@@ -17,10 +17,10 @@ import org.springframework.test.context.TestConstructor;
 @SpringBootTest(classes = Main.class)
 class ClickhouseContainerInitializerTest {
 
-    DataSource dataSource;
+    private DataSource dataSource;
 
     @Test
-    void shouldCreateContainer()  {
+    void shouldCreateContainer() {
         //given
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
@@ -30,4 +30,5 @@ class ClickhouseContainerInitializerTest {
         //then
         then(result).isEqualTo("1");
     }
+
 }

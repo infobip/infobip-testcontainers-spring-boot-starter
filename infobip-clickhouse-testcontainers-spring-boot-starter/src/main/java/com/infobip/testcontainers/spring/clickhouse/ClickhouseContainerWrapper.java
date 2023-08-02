@@ -7,7 +7,8 @@ public class ClickhouseContainerWrapper extends ClickHouseContainer {
     public ClickhouseContainerWrapper() {
     }
 
-    public ClickhouseContainerWrapper(String confluentPlatformVersion) {
-        super(confluentPlatformVersion);
+    public ClickhouseContainerWrapper(String image) {
+        super(image);
     }
+
 }

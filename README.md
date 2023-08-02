@@ -17,15 +17,17 @@ Usual use cases include:
     * [MSSQL](#MSSQL)
         * [Tests](#MSSQLTests)
         * [Local development](#MSSQLLocalDevelopment)
-        * [Docker image](#MSSQLDockerImage)
+        * [Docker image version](#MSSQLDockerImage)
+        * [Initialization script](#MSSQLInitScript)
     * [PostgreSQL](#PostgreSQL)
         * [Tests](#PostgreSQLTests)
         * [Local development](#PostgreSQLLocalDevelopment)
-        * [Docker image](#PostgreSQLDockerImage)
+        * [Docker image version](#PostgreSQLDockerImage)
+        * [Initialization script](#PostgreSQLInitScript)
     * [Redis](#Redis)
         * [Tests](#RedisTests)
         * [Local development](#RedisDevelopment)
-        * [Docker image](#RedisDockerImage)
+        * [Docker image version](#RedisDockerImage)
     * [Kafka](#Kafka)
         * [Automatic topic creation](#KafkaTopic)
         * [Tests](#KafkaTests)
@@ -34,14 +36,15 @@ Usual use cases include:
     * [RabbitMQ](#RabbitMq)
         * [Tests](#RabbitMqTests)
         * [Local development](#RabbitMqLocalDevelopment)
-        * [Docker image](#RabbitMqDockerImage)
+        * [Docker image version](#RabbitMqDockerImage)
     * [ClickHouse](#ClickHouse)
         * [Tests](#ClickHouseTests)
         * [Local development](#ClickHouseLocalDevelopment)
-        * [Docker image version](#ClickHouseDockerImageVersion)
+        * [Docker image version](#ClickHouseDockerImage)
+        * [Initialization script](#ClickHouseInitScript)
 
 <a name="Changelog"></a>
-##  Changelog
+## Changelog
 
 For changes check the [changelog](CHANGELOG.md).
 
@@ -147,6 +150,15 @@ To change the docker image used simply add the following property (e.g. in yaml)
 testcontainers.mssql.docker.image: mcr.microsoft.com/mssql/server:2017-CU12
 ```
 
+<a name="MSSQLInitScript"></a>
+#### Initialization script
+
+To add an SQL script with which the container will be initialized with add the following property (e.g. in yaml):
+
+```yaml
+testcontainers.mssql.init-script: db/init-script.sql
+```
+
 <a name="PostgreSQL"></a>
 ### PostgreSQL
 
@@ -220,7 +232,16 @@ spring:
 To change the docker image used simply add the following property (e.g. in yaml):
 
 ```yaml
-testcontainers.postgresql.docker.image: postgres:10
+testcontainers.postgresql.docker.image: postgres:15
+```
+
+<a name="PostgreSQLInitScript"></a>
+#### Initialization script
+
+To add an SQL script with which the container will be initialized with add the following property (e.g. in yaml):
+
+```yaml
+testcontainers.postgresql.init-script: db/init-script.sql
 ```
 
 <a name="Redis"></a>
@@ -501,7 +522,6 @@ Add the following profile:
 Before starting the application locally, activate development profile:
 
 ![profile.png](profile.png)
-<a name="ClickHouseDockerImageVersion"></a>
 
 and update your local configuration (e.g. application-development.yaml):
 
@@ -512,7 +532,7 @@ spring:
 ```
 In case your datasource configuration is different from default one you can provide custom configuration property path
 ```yaml
-    testcontainers.clickhouse.custom-path: "spring.datasource.clickhouse"
+testcontainers.clickhouse.custom-path: "spring.datasource.clickhouse"
 ```
 in this case your configuration would look like this
 
@@ -523,12 +543,22 @@ spring:
         jdbc-url: <host>:<port>
 ```
 
+<a name="ClickHouseDockerImage"></a>
 #### Docker image version
 
 To change the docker image used simply add the following property (e.g. in yaml):
 
 ```yaml
-testcontainers.clickhouse.docker.image: rabbitmq:latest
+testcontainers.clickhouse.docker.image: clickhouse:latest
+```
+
+<a name="ClickHouseInitScript"></a>
+#### Initialization script
+
+To add an SQL script with which the container will be initialized with add the following property (e.g. in yaml):
+
+```yaml
+testcontainers.clickhouse.init-script: db/init-script.sql
 ```
 
 ## <a name="Contributing"></a> Contributing

@@ -36,7 +36,6 @@ class DatabaseCreator {
     }
 
     private String getDatabaseUrlPattern(String url) {
-
         if (url.startsWith("jdbc:jtds")) {
             return "(?<jdbcBaseUrl>.*)/(?<databaseName>[^;]*);?(?<otherParameters>.*)";
         }
@@ -44,7 +43,7 @@ class DatabaseCreator {
         return "(?<jdbcBaseUrl>.*);database=(?<databaseName>[^;]*)(?<otherParameters>;.*)?";
     }
 
-    void createDatabaseIfItDoesntExist() {
+    void createDatabaseIfItDoesNotExist() {
         if(!databaseExists()) {
             template.execute(createDatabaseQuery);
         }

@@ -23,7 +23,6 @@ class PostgreSQLContainerInitializerTest {
 
     @Test
     void shouldCreateContainer() {
-
         // given
         JdbcTemplate jdbcTemplate = new JdbcTemplate(new SimpleDriverDataSource(
                 getDriver(properties.getUrl()),
@@ -45,4 +44,5 @@ class PostgreSQLContainerInitializerTest {
             throw new IllegalArgumentException(e);
         }
     }
+
 }

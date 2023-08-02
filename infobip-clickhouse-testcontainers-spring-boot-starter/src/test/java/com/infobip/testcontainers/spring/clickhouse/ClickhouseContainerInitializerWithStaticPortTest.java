@@ -19,8 +19,8 @@ import org.springframework.test.context.TestConstructor;
 @SpringBootTest(classes = Main.class)
 class ClickhouseContainerInitializerWithStaticPortTest {
 
-    Environment environment;
-    DataSource dataSource;
+    private Environment environment;
+    private DataSource dataSource;
 
     @Test
     void shouldCreateContainerWithStaticPort() {
