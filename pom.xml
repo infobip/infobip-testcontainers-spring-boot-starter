@@ -74,6 +74,12 @@
 			<email>tin.stavinoha@infobip.com</email>
 			<organization>Infobip Ltd.</organization>
 		</developer>
+		<developer>
+			<id>rjalic</id>
+			<name>Roko Jalić</name>
+			<email>roko.jalic@infobip.com</email>
+			<organization>Infobip Ltd.</organization>
+		</developer>
 	</developers>
 
 	<properties>
