@@ -1,3 +1,11 @@
+### 4.1.0
+
+* Added the testcontainers.db-name.init-script property to all the database starters
+* Added tests to cover the new feature
+* Fixed inconsistent formatting & typos in various places
+* Uplift clickhouse driver version
+* Removed redundant property from PostgreSQL starter
+
 ### 4.0.0
 
 * upgraded to Spring Boot 3.0.0 and testcontainers 1.17.6
