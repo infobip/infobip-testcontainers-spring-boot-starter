@@ -1,0 +1,6 @@
+spring:
+    data:
+        redis:
+            url: redis://<host>:<port>
+
+testcontainers.reuse.enable: true
