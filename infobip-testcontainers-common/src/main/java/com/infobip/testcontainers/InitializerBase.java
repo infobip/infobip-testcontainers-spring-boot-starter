@@ -60,11 +60,11 @@ public abstract class InitializerBase<C extends Startable>
         container.setPortBindings(Collections.singletonList(hostPort + ":" + containerPort));
     }
 
-    protected <T extends GenericContainer<T>> T handleReusable(Environment environment, T container) {
+    protected <SELF extends GenericContainer<SELF>, T extends GenericContainer<SELF>> T handleReusable(Environment environment, T container) {
 
         if(Objects.equals(environment.getProperty("testcontainers.reuse.enable"), "true")) {
             TestcontainersConfiguration.getInstance().updateUserConfig("testcontainers.reuse.enable", "true");
-            return container.withReuse(true);
+            container.withReuse(true);
         }
 
         return container;

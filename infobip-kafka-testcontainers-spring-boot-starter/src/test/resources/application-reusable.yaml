@@ -1,0 +1,10 @@
+spring:
+  kafka:
+    consumer:
+      groupId: test
+      autoOffsetReset: earliest
+    bootstrap-servers: <host>:<port>
+
+testcontainers.kafka.topics: test-topic:1:1
+
+testcontainers.reuse.enable: true

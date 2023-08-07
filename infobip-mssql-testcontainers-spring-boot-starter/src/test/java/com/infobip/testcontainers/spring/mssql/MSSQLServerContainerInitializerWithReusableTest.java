@@ -15,7 +15,7 @@ import static org.assertj.core.api.BDDAssertions.then;
 @SpringBootTest(classes = Main.class)
 class MSSQLServerContainerInitializerWithReusableTest {
 
-    private final MSSQLServerContainerWrapper container;
+    private final MSSQLServerContainerWrapper wrapper;
     private final int port = MSSQLServerContainer.MS_SQL_SERVER_PORT;
 
     @Test
@@ -28,6 +28,6 @@ class MSSQLServerContainerInitializerWithReusableTest {
         givenContainer.start();
 
         // then
-        then(givenContainer.getMappedPort(port)).isEqualTo(container.getMappedPort(port));
+        then(givenContainer.getMappedPort(port)).isEqualTo(wrapper.getMappedPort(port));
     }
 }

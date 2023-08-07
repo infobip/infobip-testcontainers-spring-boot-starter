@@ -28,11 +28,10 @@ public class MSSQLServerContainerInitializer extends InitializerBase<MSSQLServer
         var environment = applicationContext.getEnvironment();
         var urlPropertyNames = getUrlPropertyNames(environment);
         var urlPropertyNameToValue = getUrlPropertyNameToValue(environment, urlPropertyNames);
-
-        var container = handleReusable(environment,
-                                       Optional.ofNullable(environment.getProperty("testcontainers.mssql.docker.image"))
-                                               .map(MSSQLServerContainerWrapper::new)
-                                               .orElseGet(MSSQLServerContainerWrapper::new));
+        var wrapper = Optional.ofNullable(environment.getProperty("testcontainers.mssql.docker.image"))
+                              .map(MSSQLServerContainerWrapper::new)
+                              .orElseGet(MSSQLServerContainerWrapper::new);
+        var container = handleReusable(environment, wrapper);
 
         var initScript = Optional.ofNullable(environment.getProperty("testcontainers.mssql.init-script"))
                                  .map(container::withInitScript);
@@ -99,7 +98,7 @@ public class MSSQLServerContainerInitializer extends InitializerBase<MSSQLServer
         var password = container.getPassword();
 
         var testPropertyValues = new HashMap<>(urlPropertyNameToValue);
-        for (Map.Entry<String, String> entry : urlPropertyNameToValue.entrySet()) {
+        for (var entry : urlPropertyNameToValue.entrySet()) {
             String name = entry.getKey();
             if (DEFAULT_PROPERTY_NAMES.contains(name)) {
                 String root = name.substring(0, name.indexOf(".url"));
