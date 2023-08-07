@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestConstructor;
+import org.testcontainers.containers.MSSQLServerContainer;
 
 import static org.assertj.core.api.BDDAssertions.then;
 
@@ -12,20 +13,21 @@ import static org.assertj.core.api.BDDAssertions.then;
 @ActiveProfiles("reusable")
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @SpringBootTest(classes = Main.class)
-class MSSQLServerContainerReusableTest {
+class MSSQLServerContainerInitializerWithReusableTest {
 
-    private final MSSQLServerContainerWrapper mSSQLServerContainerWrapper;
+    private final MSSQLServerContainerWrapper container;
+    private final int port = MSSQLServerContainer.MS_SQL_SERVER_PORT;
 
     @Test
-    void shouldCreateContainer() {
+    void shouldReuseContainer() {
         // given
-        var mssqlServerContainerWrapper = new MSSQLServerContainerWrapper();
-        mssqlServerContainerWrapper.withReuse(true);
+        var givenContainer = new MSSQLServerContainerWrapper();
+        givenContainer.withReuse(true);
 
         // when
-        mssqlServerContainerWrapper.start();
+        givenContainer.start();
 
         // then
-        then(mssqlServerContainerWrapper.getMappedPort(1433)).isEqualTo(mSSQLServerContainerWrapper.getMappedPort(1433));
+        then(givenContainer.getMappedPort(port)).isEqualTo(container.getMappedPort(port));
     }
 }

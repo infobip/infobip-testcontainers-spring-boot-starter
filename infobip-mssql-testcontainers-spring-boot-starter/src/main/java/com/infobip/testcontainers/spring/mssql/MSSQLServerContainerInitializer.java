@@ -53,8 +53,7 @@ public class MSSQLServerContainerInitializer extends InitializerBase<MSSQLServer
             creator.createDatabaseIfItDoesNotExist();
         }
 
-        applicationContext.getBeanFactory()
-                          .registerSingleton(MSSQLServerContainerWrapper.class.getSimpleName(), container);
+        registerContainerAsBean(applicationContext);
     }
 
     private List<String> getUrlPropertyNames(Environment environment) {

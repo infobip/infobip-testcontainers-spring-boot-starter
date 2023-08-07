@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    clickhouse:
+      jdbc-url: jdbc:clickhouse://<host>:<port>
+
+testcontainers:
+  clickhouse:
+    custom-path: "spring.datasource.clickhouse"
+
+testcontainers.reuse.enable: true

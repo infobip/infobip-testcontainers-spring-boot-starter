@@ -5,9 +5,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.springframework.context.ApplicationContextInitializer;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.*;
 import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.core.env.Environment;
 import org.testcontainers.containers.Container;
@@ -70,6 +68,14 @@ public abstract class InitializerBase<C extends Startable>
         }
 
         return container;
+    }
+
+    protected void registerContainerAsBean(ConfigurableApplicationContext applicationContext) {
+        var c = container.get();
+        var containerClassName = c.getClass().getSimpleName();
+        var beanName = Character.toLowerCase(containerClassName.charAt(0)) + containerClassName.substring(1);
+        applicationContext.getBeanFactory()
+                          .registerSingleton(beanName, c);
     }
 
 }

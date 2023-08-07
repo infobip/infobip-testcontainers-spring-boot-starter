@@ -13,18 +13,22 @@ public class ClickhouseContainerInitializer extends InitializerBase<ClickhouseCo
     @Override
     public void initialize(ConfigurableApplicationContext applicationContext) {
         Environment environment = applicationContext.getEnvironment();
-        Optional<String> customPropertyPath = Optional.ofNullable(environment.getProperty("testcontainers.clickhouse.custom-path"));
+        Optional<String> customPropertyPath = Optional.ofNullable(
+                environment.getProperty("testcontainers.clickhouse.custom-path"));
         String jdbcUrlPropertyPath = customPropertyPath.orElse("spring.datasource") + ".jdbc-url";
         String jdbcUrlValue = Objects.requireNonNull(environment.getProperty(jdbcUrlPropertyPath));
-        ClickhouseContainerWrapper container = Optional.ofNullable(
-            environment.getProperty("testcontainers.clickhouse.docker.image.version"))
-                                                       .map(ClickhouseContainerWrapper::new)
-                                                       .orElseGet(ClickhouseContainerWrapper::new);
+        ClickhouseContainerWrapper container = (ClickhouseContainerWrapper) handleReusable(environment,
+                                       Optional.ofNullable(
+                                                       environment.getProperty(
+                                                               "testcontainers.clickhouse.docker.image.version"))
+                                               .map(ClickhouseContainerWrapper::new)
+                                               .orElseGet(ClickhouseContainerWrapper::new));
 
-        Optional.ofNullable(environment.getProperty("testcontainers.clickhouse.init-script")).ifPresent(container::withInitScript);
+        Optional.ofNullable(environment.getProperty("testcontainers.clickhouse.init-script"))
+                .ifPresent(container::withInitScript);
 
         resolveStaticPort(jdbcUrlValue, GENERIC_URL_WITH_PORT_GROUP_PATTERN)
-            .ifPresent(staticPort -> bindPort(container, staticPort, ClickhouseContainerWrapper.HTTP_PORT));
+                .ifPresent(staticPort -> bindPort(container, staticPort, ClickhouseContainerWrapper.HTTP_PORT));
 
         start(container);
 
@@ -32,6 +36,7 @@ public class ClickhouseContainerInitializer extends InitializerBase<ClickhouseCo
 
         TestPropertyValues values = TestPropertyValues.of(String.format("%s=%s", jdbcUrlPropertyPath, url));
         values.applyTo(applicationContext);
-    }
 
+        registerContainerAsBean(applicationContext);
+    }
 }
