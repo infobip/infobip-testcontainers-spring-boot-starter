@@ -1,8 +1,6 @@
 package com.infobip.testcontainers;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,8 +9,11 @@ import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.event.ContextClosedEvent;
+import org.springframework.core.env.Environment;
 import org.testcontainers.containers.Container;
+import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.lifecycle.Startable;
+import org.testcontainers.utility.TestcontainersConfiguration;
 
 public abstract class InitializerBase<C extends Startable>
     implements ApplicationContextInitializer<ConfigurableApplicationContext>, ApplicationListener<ContextClosedEvent> {
@@ -59,6 +60,16 @@ public abstract class InitializerBase<C extends Startable>
 
     protected void bindPort(Container<?> container, Integer hostPort, Integer containerPort) {
         container.setPortBindings(Collections.singletonList(hostPort + ":" + containerPort));
+    }
+
+    protected <T extends GenericContainer<T>> T handleReusable(Environment environment, T container) {
+
+        if(Objects.equals(environment.getProperty("testcontainers.reuse.enable"), "true")) {
+            TestcontainersConfiguration.getInstance().updateUserConfig("testcontainers.reuse.enable", "true");
+            return container.withReuse(true);
+        }
+
+        return container;
     }
 
 }

@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:sqlserver://<host>:<port>;database=MicrosoftDriverTestDatabase;trustServerCertificate=true
+
+testcontainers.reuse.enable: true
