@@ -25,7 +25,7 @@ public class PostgreSQLContainerInitializer extends InitializerBase<PostgreSQLCo
         var wrapper = Optional.ofNullable(environment.getProperty("testcontainers.postgresql.docker.image"))
                               .map(imageName -> new PostgreSQLContainerWrapper(database, imageName))
                               .orElseGet(() -> new PostgreSQLContainerWrapper(database));
-        var container = handleReusable(environment, wrapper);
+        var container = handleReusable(wrapper);
 
         Optional.ofNullable(environment.getProperty("testcontainers.postgresql.init-script"))
                 .ifPresent(container::withInitScript);

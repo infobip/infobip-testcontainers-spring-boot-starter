@@ -1,20 +1,17 @@
 package com.infobip.testcontainers.spring.redis;
 
-import static org.assertj.core.api.BDDAssertions.then;
-
+import com.infobip.testcontainers.TestBase;
 import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.TestConstructor;
+
+import static org.assertj.core.api.BDDAssertions.then;
 
 @AllArgsConstructor
 @ActiveProfiles("static-port")
-@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
-@SpringBootTest(classes = Main.class)
-class RedisContainerInitializerWithStaticPortTest {
+class RedisContainerInitializerWithStaticPortTest extends TestBase {
 
     private final RedisTemplate<String, String> template;
     private final RedisProperties redisProperties;

@@ -1,5 +1,6 @@
 package com.infobip.testcontainers.spring.mssql;
 
+import com.infobip.testcontainers.TestBase;
 import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
@@ -17,9 +18,7 @@ import static org.assertj.core.api.BDDAssertions.then;
 
 @AllArgsConstructor
 @ActiveProfiles("init-script")
-@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
-@SpringBootTest(classes = Main.class)
-class MSSQLServerContainerInitializerWithInitScriptTest {
+class MSSQLServerContainerInitializerWithInitScriptTest extends TestBase {
 
     private final DataSourceProperties properties;
 

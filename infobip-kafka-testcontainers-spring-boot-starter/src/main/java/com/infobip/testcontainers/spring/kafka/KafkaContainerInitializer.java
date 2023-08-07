@@ -26,7 +26,7 @@ public class KafkaContainerInitializer extends InitializerBase<KafkaContainerWra
         var wrapper = Optional.ofNullable(environment.getProperty("testcontainers.kafka.docker.image.version"))
                               .map(KafkaContainerWrapper::new)
                               .orElseGet(KafkaContainerWrapper::new);
-        var container = handleReusable(environment, wrapper);
+        var container = handleReusable(wrapper);
 
         resolveStaticPort(bootstrapServers, KAFKA_SERVER_PATTERN)
                 .ifPresent(staticPort -> bindPort(container, staticPort, KafkaContainerWrapper.KAFKA_PORT));

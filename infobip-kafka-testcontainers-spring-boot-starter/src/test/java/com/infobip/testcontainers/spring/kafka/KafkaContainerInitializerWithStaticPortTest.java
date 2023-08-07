@@ -1,28 +1,23 @@
 package com.infobip.testcontainers.spring.kafka;
 
+import com.infobip.testcontainers.TestBase;
+import lombok.AllArgsConstructor;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
+import org.springframework.test.context.ActiveProfiles;
+
+import java.time.Duration;
+import java.util.concurrent.*;
+
 import static com.infobip.testcontainers.spring.kafka.Listener.TOPIC;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.awaitility.Awaitility.await;
 
-import java.time.Duration;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-
-import lombok.AllArgsConstructor;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.support.SendResult;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.TestConstructor;
-
 @AllArgsConstructor
 @ActiveProfiles("static-port")
-@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
-@SpringBootTest(classes = Main.class)
-class KafkaContainerInitializerWithStaticPortTest {
+class KafkaContainerInitializerWithStaticPortTest extends TestBase {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final Listener listener;

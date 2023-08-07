@@ -32,5 +32,13 @@
 			<artifactId>postgresql</artifactId>
 			<version>${testcontainers.version}</version>
 		</dependency>
+
+		<!--TEST-->
+		<dependency>
+			<groupId>com.infobip</groupId>
+			<artifactId>infobip-testcontainers-test-common</artifactId>
+			<scope>test</scope>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
 </project>

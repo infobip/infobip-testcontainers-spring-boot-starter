@@ -18,7 +18,7 @@ public class RabbitContainerInitializer extends InitializerBase<RabbitContainerW
         var wrapper = Optional.ofNullable(environment.getProperty("testcontainers.rabbit.docker.image"))
                               .map(RabbitContainerWrapper::new)
                               .orElseGet(() -> new RabbitContainerWrapper("rabbitmq:3.8.9-alpine"));
-        var container = handleReusable(environment, wrapper);
+        var container = handleReusable(wrapper);
 
         resolveStaticPort(environment)
                 .ifPresent(staticPort -> bindPort(container, staticPort, PORT));

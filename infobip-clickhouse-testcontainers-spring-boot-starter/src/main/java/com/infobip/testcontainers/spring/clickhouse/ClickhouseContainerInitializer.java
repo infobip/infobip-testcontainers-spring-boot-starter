@@ -18,7 +18,7 @@ public class ClickhouseContainerInitializer extends InitializerBase<ClickhouseCo
         var wrapper = Optional.ofNullable(environment.getProperty("testcontainers.clickhouse.docker.image.version"))
                               .map(ClickhouseContainerWrapper::new)
                               .orElseGet(ClickhouseContainerWrapper::new);
-        var container = handleReusable(environment, wrapper);
+        var container = handleReusable(wrapper);
 
         Optional.ofNullable(environment.getProperty("testcontainers.clickhouse.init-script"))
                 .ifPresent(container::withInitScript);

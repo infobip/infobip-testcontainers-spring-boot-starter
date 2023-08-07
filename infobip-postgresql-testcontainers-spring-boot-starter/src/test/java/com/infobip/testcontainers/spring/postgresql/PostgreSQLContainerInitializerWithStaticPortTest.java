@@ -6,6 +6,7 @@ import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import com.infobip.testcontainers.TestBase;
 import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
@@ -17,9 +18,7 @@ import org.springframework.test.context.TestConstructor;
 
 @AllArgsConstructor
 @ActiveProfiles("static-port")
-@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
-@SpringBootTest(classes = Main.class)
-class PostgreSQLContainerInitializerWithStaticPortTest {
+class PostgreSQLContainerInitializerWithStaticPortTest extends TestBase {
 
     private final DataSourceProperties properties;
 

@@ -15,7 +15,6 @@ import com.infobip.testcontainers.InitializerBase;
 import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
-import org.testcontainers.utility.TestcontainersConfiguration;
 
 public class MSSQLServerContainerInitializer extends InitializerBase<MSSQLServerContainerWrapper> {
 
@@ -31,7 +30,7 @@ public class MSSQLServerContainerInitializer extends InitializerBase<MSSQLServer
         var wrapper = Optional.ofNullable(environment.getProperty("testcontainers.mssql.docker.image"))
                               .map(MSSQLServerContainerWrapper::new)
                               .orElseGet(MSSQLServerContainerWrapper::new);
-        var container = handleReusable(environment, wrapper);
+        var container = handleReusable(wrapper);
 
         var initScript = Optional.ofNullable(environment.getProperty("testcontainers.mssql.init-script"))
                                  .map(container::withInitScript);

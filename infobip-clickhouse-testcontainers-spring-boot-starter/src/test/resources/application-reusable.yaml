@@ -6,5 +6,3 @@ spring:
 testcontainers:
   clickhouse:
     custom-path: "spring.datasource.clickhouse"
-
-testcontainers.reuse.enable: true

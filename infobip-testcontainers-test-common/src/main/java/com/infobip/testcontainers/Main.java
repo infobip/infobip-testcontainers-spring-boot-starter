@@ -1,4 +1,4 @@
-package com.infobip.testcontainers.spring.postgresql;
+package com.infobip.testcontainers;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;

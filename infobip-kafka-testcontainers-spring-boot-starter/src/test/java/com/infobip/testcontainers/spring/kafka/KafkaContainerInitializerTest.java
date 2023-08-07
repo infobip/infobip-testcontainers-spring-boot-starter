@@ -9,6 +9,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import com.infobip.testcontainers.TestBase;
 import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,9 +20,7 @@ import org.springframework.test.context.TestConstructor;
 
 @AllArgsConstructor
 @ActiveProfiles("test")
-@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
-@SpringBootTest(classes = Main.class)
-class KafkaContainerInitializerTest {
+class KafkaContainerInitializerTest extends TestBase {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final Listener listener;

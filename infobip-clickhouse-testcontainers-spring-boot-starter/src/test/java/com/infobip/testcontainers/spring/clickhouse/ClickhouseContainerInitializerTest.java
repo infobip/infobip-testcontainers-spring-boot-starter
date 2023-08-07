@@ -4,6 +4,7 @@ import static org.assertj.core.api.BDDAssertions.then;
 
 import javax.sql.DataSource;
 
+import com.infobip.testcontainers.TestBase;
 import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,9 +14,7 @@ import org.springframework.test.context.TestConstructor;
 
 @AllArgsConstructor
 @ActiveProfiles("test")
-@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
-@SpringBootTest(classes = Main.class)
-class ClickhouseContainerInitializerTest {
+class ClickhouseContainerInitializerTest extends TestBase {
 
     private DataSource dataSource;
 

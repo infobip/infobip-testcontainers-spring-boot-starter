@@ -6,7 +6,6 @@ import java.util.Optional;
 import com.infobip.testcontainers.InitializerBase;
 import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.core.env.Environment;
 
 public class RedisContainerInitializer extends InitializerBase<RedisContainerWrapper> {
 
@@ -17,7 +16,7 @@ public class RedisContainerInitializer extends InitializerBase<RedisContainerWra
         var wrapper = Optional.ofNullable(environment.getProperty("testcontainers.redis.docker.image"))
                               .map(RedisContainerWrapper::new)
                               .orElseGet(() -> new RedisContainerWrapper("redis:6.2.6-alpine"));
-        var container = handleReusable(environment, wrapper);
+        var container = handleReusable(wrapper);
         resolveStaticPort(redisUrl, GENERIC_URL_WITH_PORT_GROUP_PATTERN)
                 .ifPresent(staticPort -> bindPort(container, staticPort, RedisContainerWrapper.PORT));
 

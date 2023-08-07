@@ -1,26 +1,21 @@
 package com.infobip.testcontainers.spring.mssql;
 
-import static org.assertj.core.api.BDDAssertions.then;
-
-import java.sql.Driver;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
+import com.infobip.testcontainers.TestBase;
 import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.TestConstructor;
+
+import java.sql.*;
+
+import static org.assertj.core.api.BDDAssertions.then;
 
 @AllArgsConstructor
 @ActiveProfiles("static-port")
-@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
-@SpringBootTest(classes = Main.class)
-class MSSQLServerContainerInitializerWithStaticPortTest {
+class MSSQLServerContainerInitializerWithStaticPortTest extends TestBase {
 
     private final Environment environment;
     private final DataSourceProperties properties;
