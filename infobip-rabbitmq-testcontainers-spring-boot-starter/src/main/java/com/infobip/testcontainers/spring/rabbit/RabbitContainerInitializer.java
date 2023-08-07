@@ -13,29 +13,28 @@ import org.testcontainers.containers.wait.strategy.Wait;
 public class RabbitContainerInitializer extends InitializerBase<RabbitContainerWrapper> {
 
     @Override
-    public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
-        Environment environment = configurableApplicationContext.getEnvironment();
-        RabbitContainerWrapper container = Optional.ofNullable(
-            environment.getProperty("testcontainers.rabbit.docker.image"))
-                                                   .map(RabbitContainerWrapper::new)
-                                                   .orElseGet(
-                                                       () -> new RabbitContainerWrapper("rabbitmq:3.8.9-alpine"));
+    public void initialize(ConfigurableApplicationContext applicationContext) {
+        var environment = applicationContext.getEnvironment();
+        var wrapper = Optional.ofNullable(environment.getProperty("testcontainers.rabbit.docker.image"))
+                              .map(RabbitContainerWrapper::new)
+                              .orElseGet(() -> new RabbitContainerWrapper("rabbitmq:3.8.9-alpine"));
+        var container = handleReusable(environment, wrapper);
 
         resolveStaticPort(environment)
-            .ifPresent(staticPort -> bindPort(container, staticPort, PORT));
+                .ifPresent(staticPort -> bindPort(container, staticPort, PORT));
 
         container.waitingFor(Wait.forListeningPort());
         start(container);
 
-        TestPropertyValues values = TestPropertyValues.of(
-            String.format("spring.rabbitmq.addresses=%s:%d", container.getHost(),
-                          container.getMappedPort(PORT)));
-        values.applyTo(configurableApplicationContext);
+        var values = TestPropertyValues.of(
+                String.format("spring.rabbitmq.addresses=%s:%d", container.getHost(), container.getMappedPort(PORT)));
+        values.applyTo(applicationContext);
+
+        registerContainerAsBean(applicationContext);
     }
 
     private Optional<Integer> resolveStaticPort(Environment environment) {
         return Optional.ofNullable(environment.getProperty("spring.rabbitmq.port"))
                        .map(Integer::valueOf);
     }
-
 }
