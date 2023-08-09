@@ -1,21 +1,19 @@
 package com.infobip.testcontainers;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
+import org.springframework.context.*;
+import org.springframework.context.event.ContextClosedEvent;
+import org.testcontainers.containers.Container;
+import org.testcontainers.containers.GenericContainer;
+import org.testcontainers.lifecycle.Startable;
+import org.testcontainers.utility.TestcontainersConfiguration;
+
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.springframework.context.ApplicationContextInitializer;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.event.ContextClosedEvent;
-import org.testcontainers.containers.Container;
-import org.testcontainers.lifecycle.Startable;
-
 public abstract class InitializerBase<C extends Startable>
-    implements ApplicationContextInitializer<ConfigurableApplicationContext>, ApplicationListener<ContextClosedEvent> {
+        implements ApplicationContextInitializer<ConfigurableApplicationContext>, ApplicationListener<ContextClosedEvent> {
 
     public static final String PORT_PLACEHOLDER = "<port>";
     public static final String HOST_PLACEHOLDER = "<host>";
@@ -37,7 +35,9 @@ public abstract class InitializerBase<C extends Startable>
         container.start();
     }
 
-    protected String replaceHostAndPortPlaceholders(String source, Container<?> container, Integer originalContainerPort) {
+    protected String replaceHostAndPortPlaceholders(String source,
+                                                    Container<?> container,
+                                                    Integer originalContainerPort) {
         return source.replaceAll(HOST_PLACEHOLDER, container.getHost())
                      .replaceAll(PORT_PLACEHOLDER, container.getMappedPort(originalContainerPort).toString());
     }
@@ -50,10 +50,11 @@ public abstract class InitializerBase<C extends Startable>
                        .map(Integer::valueOf);
     }
 
-    protected Optional<Integer> resolveStaticPort(Collection<String> connectionStrings, Pattern urlPatternWithPortGroup) {
+    protected Optional<Integer> resolveStaticPort(Collection<String> connectionStrings,
+                                                  Pattern urlPatternWithPortGroup) {
         return connectionStrings.stream()
                                 .flatMap(connectionString -> resolveStaticPort(connectionString,
-                                        urlPatternWithPortGroup).stream())
+                                                                               urlPatternWithPortGroup).stream())
                                 .findFirst();
     }
 
@@ -61,4 +62,20 @@ public abstract class InitializerBase<C extends Startable>
         container.setPortBindings(Collections.singletonList(hostPort + ":" + containerPort));
     }
 
+    protected <SELF extends GenericContainer<SELF>, T extends GenericContainer<SELF>> T handleReusable(T container) {
+
+        if (TestcontainersConfiguration.getInstance().environmentSupportsReuse()) {
+            container.withReuse(true);
+        }
+
+        return container;
+    }
+
+    protected void registerContainerAsBean(ConfigurableApplicationContext applicationContext) {
+        var c = container.get();
+        var containerClassName = c.getClass().getSimpleName();
+        var beanName = Character.toLowerCase(containerClassName.charAt(0)) + containerClassName.substring(1);
+        applicationContext.getBeanFactory()
+                          .registerSingleton(beanName, c);
+    }
 }

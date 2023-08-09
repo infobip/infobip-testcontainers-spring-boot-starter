@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://<host>:<port>/TestDatabase
+    username: test
+    password: test

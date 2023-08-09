@@ -6,26 +6,26 @@ import java.util.Optional;
 import com.infobip.testcontainers.InitializerBase;
 import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.core.env.Environment;
 
 public class RedisContainerInitializer extends InitializerBase<RedisContainerWrapper> {
 
     @Override
     public void initialize(ConfigurableApplicationContext applicationContext) {
-        Environment environment = applicationContext.getEnvironment();
-        String redisUrl = Objects.requireNonNull(environment.getProperty("spring.data.redis.url"));
-        RedisContainerWrapper container = Optional.ofNullable(
-            environment.getProperty("testcontainers.redis.docker.image"))
-                                                  .map(RedisContainerWrapper::new)
-                                                  .orElseGet(() -> new RedisContainerWrapper("redis:6.2.6-alpine"));
+        var environment = applicationContext.getEnvironment();
+        var redisUrl = Objects.requireNonNull(environment.getProperty("spring.data.redis.url"));
+        var wrapper = Optional.ofNullable(environment.getProperty("testcontainers.redis.docker.image"))
+                              .map(RedisContainerWrapper::new)
+                              .orElseGet(() -> new RedisContainerWrapper("redis:6.2.6-alpine"));
+        var container = handleReusable(wrapper);
         resolveStaticPort(redisUrl, GENERIC_URL_WITH_PORT_GROUP_PATTERN)
-            .ifPresent(staticPort -> bindPort(container, staticPort, RedisContainerWrapper.PORT));
+                .ifPresent(staticPort -> bindPort(container, staticPort, RedisContainerWrapper.PORT));
 
         start(container);
 
-        String url = replaceHostAndPortPlaceholders(redisUrl, container, RedisContainerWrapper.PORT);
-        TestPropertyValues values = TestPropertyValues.of("spring.data.redis.url=" + url);
+        var url = replaceHostAndPortPlaceholders(redisUrl, container, RedisContainerWrapper.PORT);
+        var values = TestPropertyValues.of("spring.data.redis.url=" + url);
         values.applyTo(applicationContext);
-    }
 
+        registerContainerAsBean(applicationContext);
+    }
 }

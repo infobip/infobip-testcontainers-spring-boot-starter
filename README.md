@@ -14,6 +14,8 @@ Usual use cases include:
 
 * [Changelog](#Changelog)
 * [Usage](#Usage)
+    * [General](#General)
+    * [Reusable](#Reusable)
     * [MSSQL](#MSSQL)
         * [Tests](#MSSQLTests)
         * [Local development](#MSSQLLocalDevelopment)
@@ -58,6 +60,10 @@ This library tries to reuse existing Spring Boot configuration classes and enhan
 Generally, in cases where port placeholders are used (`<port>`), the library will make sure that the appropriate Docker container is started on
 a randomly selected open port and that the selected value will be used by the configuration in the runtime.
 You can use a concrete value instead of the placeholder - in that case the library will attempt to start the container on the specified port.
+
+<a name="Reusable"></a>
+### Reusable
+If [reuse is enabled](https://java.testcontainers.org/features/reuse/) this project automatically marks all created containers for reuse.
 
 <a name="MSSQL"></a>
 ### MSSQL

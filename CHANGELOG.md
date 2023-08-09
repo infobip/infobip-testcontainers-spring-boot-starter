@@ -1,3 +1,6 @@
+### 4.2.0
+* Added reusable support
+
 ### 4.1.0
 
 * Added the testcontainers.db-name.init-script property to all the database starters
