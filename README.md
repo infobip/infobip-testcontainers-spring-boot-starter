@@ -45,15 +45,15 @@ Usual use cases include:
         * [Docker image version](#ClickHouseDockerImage)
         * [Initialization script](#ClickHouseInitScript)
 
-<a name="Changelog"></a>
+<a id="Changelog"></a>
 ## Changelog
 
 For changes check the [changelog](CHANGELOG.md).
 
-<a name="Usage"></a>
+<a id="Usage"></a>
 ## Usage
 
-<a name="General"></a>
+<a id="General"></a>
 ### General
 
 This library tries to reuse existing Spring Boot configuration classes and enhance their behaviour by performing some extra steps around them.
@@ -61,16 +61,16 @@ Generally, in cases where port placeholders are used (`<port>`), the library wil
 a randomly selected open port and that the selected value will be used by the configuration in the runtime.
 You can use a concrete value instead of the placeholder - in that case the library will attempt to start the container on the specified port.
 
-<a name="Reusable"></a>
+<a id="Reusable"></a>
 ### Reusable
 If [reuse is enabled](https://java.testcontainers.org/features/reuse/) this project automatically marks all created containers for reuse.
 
-<a name="MSSQL"></a>
+<a id="MSSQL"></a>
 ### MSSQL
 
 **Disclaimer**: by using this testcontainer you accept the EULA for mssql docker image as [required here](https://hub.docker.com/_/microsoft-mssql-server).
 
-<a name="MSSQLTests"></a>
+<a id="MSSQLTests"></a>
 #### Tests: 
 
 Include the dependency:
@@ -105,7 +105,7 @@ Container IP address is resolved based on running host, meaning on local machine
 while inside Docker placeholder will resolve to `containerIp`.
 When `<port>` placeholder is used, container will be mapped on random port and automatically substituted.
 
-<a name="MSSQLLocalDevelopment"></a>
+<a id="MSSQLLocalDevelopment"></a>
 #### Local Development: 
 
 Add the following profile:
@@ -147,7 +147,7 @@ spring:
     url: jdbc:sqlserver://<host>:<port>;database=FooBarDb_test_${user.name}
 ```
 
-<a name="MSSQLDockerImage"></a>
+<a id="MSSQLDockerImage"></a>
 #### Docker image: 
 
 To change the docker image used simply add the following property (e.g. in yaml):
@@ -156,7 +156,7 @@ To change the docker image used simply add the following property (e.g. in yaml)
 testcontainers.mssql.docker.image: mcr.microsoft.com/mssql/server:2017-CU12
 ```
 
-<a name="MSSQLInitScript"></a>
+<a id="MSSQLInitScript"></a>
 #### Initialization script
 
 To add an SQL script with which the container will be initialized with add the following property (e.g. in yaml):
@@ -165,10 +165,10 @@ To add an SQL script with which the container will be initialized with add the f
 testcontainers.mssql.init-script: db/init-script.sql
 ```
 
-<a name="PostgreSQL"></a>
+<a id="PostgreSQL"></a>
 ### PostgreSQL
 
-<a name="PostgreSQLTests"></a>
+<a id="PostgreSQLTests"></a>
 #### Tests: 
 
 Include the dependency:
@@ -197,7 +197,7 @@ Container IP address is resolved based on running host, meaning on local machine
 while inside Docker placeholder will resolve to `containerIp`.
 When `<port>` placeholder is used, container will be mapped on random port and automatically substituted.
 
-<a name="PostgreSQLLocalDevelopment"></a>
+<a id="PostgreSQLLocalDevelopment"></a>
 #### Local Development: 
 
 Add the following profile:
@@ -232,7 +232,7 @@ spring:
     password: test
 ```
 
-<a name="PostgreSQLDockerImage"></a>
+<a id="PostgreSQLDockerImage"></a>
 #### Docker image: 
 
 To change the docker image used simply add the following property (e.g. in yaml):
@@ -241,7 +241,7 @@ To change the docker image used simply add the following property (e.g. in yaml)
 testcontainers.postgresql.docker.image: postgres:15
 ```
 
-<a name="PostgreSQLInitScript"></a>
+<a id="PostgreSQLInitScript"></a>
 #### Initialization script
 
 To add an SQL script with which the container will be initialized with add the following property (e.g. in yaml):
@@ -250,10 +250,10 @@ To add an SQL script with which the container will be initialized with add the f
 testcontainers.postgresql.init-script: db/init-script.sql
 ```
 
-<a name="Redis"></a>
+<a id="Redis"></a>
 ### Redis
 
-<a name="RedisTests"></a>
+<a id="RedisTests"></a>
 #### Tests: 
 
 Include the dependency:
@@ -279,7 +279,7 @@ Container IP address is resolved based on running host, meaning on local machine
 while inside Docker placeholder will resolve to `containerIp`.
 When `<port>` placeholder is used, container will be mapped on random port and automatically substituted.
 
-<a name="RedisDevelopment"></a>
+<a id="RedisDevelopment"></a>
 #### Local Development: 
 
 Add the following profile:
@@ -312,7 +312,7 @@ spring:
     url: redis://<host>:<port>
 ```
 
-<a name="RedisDockerImage"></a>
+<a id="RedisDockerImage"></a>
 #### Docker image: 
 
 To change the docker image used simply add the following property (e.g. in yaml):
@@ -321,10 +321,10 @@ To change the docker image used simply add the following property (e.g. in yaml)
 testcontainers.redis.docker.image: redis:5.0.7-alpine
 ```
 
-<a name="Kafka"></a>
+<a id="Kafka"></a>
 ### Kafka
 
-<a name="KafkaTopic"></a>
+<a id="KafkaTopic"></a>
 #### Automatic topic creation
 
 Format: `<topicName>:<numPartitions>:<replicationFactor>`
@@ -333,7 +333,7 @@ Format: `<topicName>:<numPartitions>:<replicationFactor>`
 testcontainers.kafka.topics: test-topic:1:1, test-topic-2:1:1
 ```
 
-<a name="KafkaTests"></a>
+<a id="KafkaTests"></a>
 #### Tests: 
 
 Include the dependency:
@@ -360,7 +360,7 @@ Container IP address is resolved based on running host, meaning on local machine
 while inside Docker placeholder will resolve to `containerIp`.
 When `<port>` placeholder is used, container will be mapped on random port and automatically substituted.
 
-<a name="KafkaLocalDevelopment"></a>
+<a id="KafkaLocalDevelopment"></a>
 #### Local Development: 
 
 Add the following profile:
@@ -393,7 +393,7 @@ spring:
     bootstrap-servers: <host>:<port>
 ```
 
-<a name="KafkaDockerImage"></a>
+<a id="KafkaDockerImage"></a>
 #### Docker image: 
 
 To change the docker image version used simply add the following property (e.g. in yaml):
@@ -402,10 +402,10 @@ To change the docker image version used simply add the following property (e.g. 
 testcontainers.kafka.docker.image.version: 2.1.0
 ```
 
-<a name="RabbitMq"></a>
+<a id="RabbitMq"></a>
 ### RabbitMq
 
-<a name="RabbitMqTests"></a>
+<a id="RabbitMqTests"></a>
 #### Tests: 
 
 Include the dependency:
@@ -454,7 +454,7 @@ In this example method:
 <b>Important</b>: Queues are declared in Rabbit only after some message is sent to the queue.
 If you log into `docker` and try to find queue, it won't be listed if no message was sent to it.
 
-<a name="RabbitMqLocalDevelopment"></a>
+<a id="RabbitMqLocalDevelopment"></a>
 #### Local Development: 
 
 Add the following profile:
@@ -479,7 +479,7 @@ Before starting the application locally, activate development profile:
 
 ![profile.png](profile.png)
 
-<a name="RabbitMqDockerImage"></a>
+<a id="RabbitMqDockerImage"></a>
 #### Docker image: 
 
 To change the docker image used simply add the following property (e.g. in yaml):
@@ -487,10 +487,10 @@ To change the docker image used simply add the following property (e.g. in yaml)
 ```yaml
 testcontainers.rabbit.docker.image: rabbitmq:3.6.14-alpine
 ```
-<a name="ClickHouse"></a>
+<a id="ClickHouse"></a>
 ### ClickHouse
 
-<a name="ClickHouseTests"></a>
+<a id="ClickHouseTests"></a>
 #### Tests
 
 Include the dependency:
@@ -504,7 +504,7 @@ Include the dependency:
 </dependency>
 ```
 
-<a name="ClickHouseLocalDevelopment"></a>
+<a id="ClickHouseLocalDevelopment"></a>
 #### Local development
 
 Add the following profile:
@@ -549,7 +549,7 @@ spring:
         jdbc-url: <host>:<port>
 ```
 
-<a name="ClickHouseDockerImage"></a>
+<a id="ClickHouseDockerImage"></a>
 #### Docker image version
 
 To change the docker image used simply add the following property (e.g. in yaml):
@@ -558,7 +558,7 @@ To change the docker image used simply add the following property (e.g. in yaml)
 testcontainers.clickhouse.docker.image: clickhouse:latest
 ```
 
-<a name="ClickHouseInitScript"></a>
+<a id="ClickHouseInitScript"></a>
 #### Initialization script
 
 To add an SQL script with which the container will be initialized with add the following property (e.g. in yaml):
@@ -567,13 +567,13 @@ To add an SQL script with which the container will be initialized with add the f
 testcontainers.clickhouse.init-script: db/init-script.sql
 ```
 
-## <a name="Contributing"></a> Contributing
+## <a id="Contributing"></a> Contributing
 
 If you have an idea for a new feature or want to report a bug please use the issue tracker.
 
 Pull requests are welcome!
 
-## <a name="License"></a> License
+## <a id="License"></a> License
 
 This library is licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
