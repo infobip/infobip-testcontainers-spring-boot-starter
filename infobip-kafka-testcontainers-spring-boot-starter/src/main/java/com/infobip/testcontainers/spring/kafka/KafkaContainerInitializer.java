@@ -35,7 +35,7 @@ public class KafkaContainerInitializer extends InitializerBase<KafkaContainerWra
         var url = replaceHostAndPortPlaceholders(bootstrapServers, container, KafkaContainerWrapper.KAFKA_PORT);
 
         Optional.ofNullable(environment.getProperty("testcontainers.kafka.topics", String[].class))
-                .ifPresent(topics -> createTestKafkaTopics(url, topics));
+                .ifPresent(topics -> createTestKafkaTopics(container, url, topics));
         var values = TestPropertyValues.of(
                 "spring.kafka.bootstrap-servers=" + url);
         values.applyTo(applicationContext);
@@ -43,13 +43,28 @@ public class KafkaContainerInitializer extends InitializerBase<KafkaContainerWra
         registerContainerAsBean(applicationContext);
     }
 
-    private static void createTestKafkaTopics(String bootstrapServers, String[] topics) {
+    private static void createTestKafkaTopics(KafkaContainerWrapper container, String bootstrapServers, String[] topics) {
 
         try (var client = AdminClient.create(Collections.singletonMap("bootstrap.servers", bootstrapServers))) {
+            if(container.isShouldBeReused()) {
+                deleteTopics(client, topics);
+            }
             createTopics(client, topics);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private static void deleteTopics(AdminClient client, String[] topics) throws ExecutionException,
+            InterruptedException, TimeoutException {
+        var existingTopics = client.listTopics().names().get(60, TimeUnit.SECONDS);
+        var deleteTopics = Stream.of(topics)
+                              .map(topic -> topic.split(":"))
+                              .filter(topic -> !existingTopics.contains(topic[0]))
+                              .map(topicParts -> topicParts[0])
+                              .toList();
+
+        client.deleteTopics(deleteTopics);
     }
 
     private static void createTopics(AdminClient client, String[] topics) throws InterruptedException,
@@ -60,7 +75,7 @@ public class KafkaContainerInitializer extends InitializerBase<KafkaContainerWra
                               .filter(topic -> !existingTopics.contains(topic[0]))
                               .map(topicParts -> new NewTopic(topicParts[0], parseInt(topicParts[1]),
                                                               parseShort(topicParts[2])))
-                              .collect(Collectors.toList());
+                              .toList();
 
         client.createTopics(newTopics)
               .all()
