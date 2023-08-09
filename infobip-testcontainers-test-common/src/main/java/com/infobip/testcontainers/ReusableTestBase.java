@@ -6,9 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestConstructor;
 import org.testcontainers.utility.TestcontainersConfiguration;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.File;
 
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @SpringBootTest(classes = Main.class)
@@ -30,6 +28,7 @@ public class ReusableTestBase {
 
     @AfterAll
     static void cleanupTestcontainersPropertiesFile() {
+        TestcontainersConfiguration.getInstance().updateUserConfig("testcontainers.reuse.enable", "false");
         FILE.delete();
 
         if (TEMP_FILE.exists()) {

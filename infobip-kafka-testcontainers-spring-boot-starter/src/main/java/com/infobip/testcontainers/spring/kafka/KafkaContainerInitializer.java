@@ -46,30 +46,18 @@ public class KafkaContainerInitializer extends InitializerBase<KafkaContainerWra
     private static void createTestKafkaTopics(String bootstrapServers, String[] topics) {
 
         try (var client = AdminClient.create(Collections.singletonMap("bootstrap.servers", bootstrapServers))) {
-            deleteTopics(client, topics);
             createTopics(client, topics);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    private static void deleteTopics(AdminClient client, String[] topics) throws InterruptedException,
-            ExecutionException, TimeoutException {
-        var existingTopics = client.listTopics().names().get(60, TimeUnit.SECONDS);
-        var deleteTopics = Stream.of(topics)
-                                 .map(topic -> topic.split(":"))
-                                 .map(topicParts -> topicParts[0])
-                                 .filter(existingTopics::contains)
-                                 .collect(Collectors.toList());
-        client.deleteTopics(deleteTopics)
-              .all()
-              .get(60, TimeUnit.SECONDS);
-    }
-
     private static void createTopics(AdminClient client, String[] topics) throws InterruptedException,
             ExecutionException, TimeoutException {
+        var existingTopics = client.listTopics().names().get(60, TimeUnit.SECONDS);
         var newTopics = Stream.of(topics)
                               .map(topic -> topic.split(":"))
+                              .filter(topic -> !existingTopics.contains(topic[0]))
                               .map(topicParts -> new NewTopic(topicParts[0], parseInt(topicParts[1]),
                                                               parseShort(topicParts[2])))
                               .collect(Collectors.toList());
