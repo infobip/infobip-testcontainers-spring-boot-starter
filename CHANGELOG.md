@@ -1,4 +1,7 @@
 ### 4.2.0
+* Added support for MySQL
+
+### 4.2.0
 * Added reusable support
 
 ### 4.1.0
