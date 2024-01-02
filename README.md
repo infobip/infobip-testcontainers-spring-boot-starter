@@ -21,6 +21,11 @@ Usual use cases include:
         * [Local development](#MSSQLLocalDevelopment)
         * [Docker image version](#MSSQLDockerImage)
         * [Initialization script](#MSSQLInitScript)
+    * [MySQL](#MySQL)
+      * [Tests](#MySQLTests)
+      * [Local development](#MySQLLocalDevelopment)
+      * [Docker image version](#MySQLDockerImage)
+      * [Initialization script](#MySQLInitScript)
     * [PostgreSQL](#PostgreSQL)
         * [Tests](#PostgreSQLTests)
         * [Local development](#PostgreSQLLocalDevelopment)
@@ -163,6 +168,91 @@ To add an SQL script with which the container will be initialized with add the f
 
 ```yaml
 testcontainers.mssql.init-script: db/init-script.sql
+```
+
+<a id="MySQL"></a>
+### MySQL
+
+<a id="MySQLTests"></a>
+#### Tests:
+
+Include the dependency:
+
+```xml
+<dependency>
+	<groupId>com.infobip</groupId>
+	<artifactId>infobip-mysql-testcontainers-spring-boot-starter</artifactId>
+	<version>${infobip-mysql-testcontainers-spring-boot-starter.version}</version>
+	<scope>test</scope>
+</dependency>
+```
+
+Configuration:
+
+```yaml
+spring:
+  datasource:
+    url: jdbc:mysql://<host>:<port>/FooBarDb
+    username: test
+    password: test
+```
+
+Logical database is automatically created.
+Container IP address is resolved based on running host, meaning on local machine `<host>` will resolve to `localhost`
+while inside Docker placeholder will resolve to `containerIp`.
+When `<port>` placeholder is used, container will be mapped on random port and automatically substituted.
+
+<a id="MySQLLocalDevelopment"></a>
+#### Local Development:
+
+Add the following profile:
+
+```xml
+<profiles>
+    <profile>
+        <id>development</id>
+        <dependencies>
+            <dependency>
+                <groupId>com.infobip</groupId>
+                <artifactId>infobip-mysql-testcontainers-spring-boot-starter</artifactId>
+                <version>${infobip-mysql-testcontainers-spring-boot-starter.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </profile>
+</profiles>
+```
+
+Before starting the application locally, activate development profile:
+
+![profile.png](profile.png)
+
+and update your local configuration (e.g. application-development.yaml):
+
+```yaml
+spring:
+  datasource:
+    url: jdbc:mysql://<host>:<port>/FooBarDb_test_${user.name}
+    username: test
+    password: test
+```
+
+<a id="MySQLDockerImage"></a>
+#### Docker image:
+
+To change the docker image used simply add the following property (e.g. in yaml):
+
+```yaml
+testcontainers.mysql.docker.image: mysql:5.7.34
+```
+
+<a id="MySQLInitScript"></a>
+#### Initialization script
+
+To add an SQL script with which the container will be initialized with add the following property (e.g. in yaml):
+
+```yaml
+testcontainers.mysql.init-script: db/init-script.sql
 ```
 
 <a id="PostgreSQL"></a>

@@ -35,6 +35,7 @@
 
 	<modules>
 		<module>infobip-mssql-testcontainers-spring-boot-starter</module>
+		<module>infobip-mysql-testcontainers-spring-boot-starter</module>
 		<module>infobip-postgresql-testcontainers-spring-boot-starter</module>
 		<module>infobip-kafka-testcontainers-spring-boot-starter</module>
 		<module>infobip-redis-testcontainers-spring-boot-starter</module>
