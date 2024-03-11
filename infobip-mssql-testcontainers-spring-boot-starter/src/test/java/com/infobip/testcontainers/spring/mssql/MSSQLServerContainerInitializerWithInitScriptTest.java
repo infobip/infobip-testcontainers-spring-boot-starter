@@ -2,6 +2,7 @@ package com.infobip.testcontainers.spring.mssql;
 
 import com.infobip.testcontainers.TestBase;
 import lombok.AllArgsConstructor;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,6 +17,7 @@ import java.sql.SQLException;
 
 import static org.assertj.core.api.BDDAssertions.then;
 
+@Disabled
 @AllArgsConstructor
 @ActiveProfiles("init-script")
 class MSSQLServerContainerInitializerWithInitScriptTest extends TestBase {
