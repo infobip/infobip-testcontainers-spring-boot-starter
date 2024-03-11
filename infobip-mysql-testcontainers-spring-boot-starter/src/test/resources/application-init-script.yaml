@@ -1,8 +1,6 @@
 spring:
   datasource:
     url: jdbc:mysql://<host>:<port>/TestDatabase
-    username: test
-    password: test
 
 testcontainers:
   mysql:

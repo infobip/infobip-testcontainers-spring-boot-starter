@@ -1,5 +1,7 @@
 spring:
   datasource:
     url: jdbc:mysql://<host>:<port>/TestDatabase
-    username: test
-    password: test
+  r2dbc:
+    url: r2dbc:pool:mysql://<host>:<port>/TestDatabase
+  flyway:
+    url: jdbc:mysql://<host>:<port>/TestDatabase
