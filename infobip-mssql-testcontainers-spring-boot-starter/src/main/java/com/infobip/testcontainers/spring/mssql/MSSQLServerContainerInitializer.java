@@ -1,5 +1,6 @@
 package com.infobip.testcontainers.spring.mssql;
 
+import static org.testcontainers.containers.MSSQLServerContainer.IMAGE;
 import static org.testcontainers.containers.MSSQLServerContainer.MS_SQL_SERVER_PORT;
 
 import java.util.Arrays;
@@ -15,6 +16,7 @@ import com.infobip.testcontainers.InitializerBase;
 import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
+import org.testcontainers.utility.DockerImageName;
 
 public class MSSQLServerContainerInitializer extends InitializerBase<MSSQLServerContainerWrapper> {
 
@@ -28,8 +30,9 @@ public class MSSQLServerContainerInitializer extends InitializerBase<MSSQLServer
         var urlPropertyNames = getUrlPropertyNames(environment);
         var urlPropertyNameToValue = getUrlPropertyNameToValue(environment, urlPropertyNames);
         var wrapper = Optional.ofNullable(environment.getProperty("testcontainers.mssql.docker.image"))
-                              .map(MSSQLServerContainerWrapper::new)
-                              .orElseGet(MSSQLServerContainerWrapper::new);
+                .map((name)->DockerImageName.parse(name).asCompatibleSubstituteFor(IMAGE))
+                .map(MSSQLServerContainerWrapper::new)
+                .orElseGet(MSSQLServerContainerWrapper::new);
         var container = handleReusable(wrapper);
 
         var initScript = Optional.ofNullable(environment.getProperty("testcontainers.mssql.init-script"))

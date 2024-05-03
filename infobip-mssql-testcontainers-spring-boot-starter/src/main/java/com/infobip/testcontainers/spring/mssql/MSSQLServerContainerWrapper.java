@@ -1,14 +1,21 @@
 package com.infobip.testcontainers.spring.mssql;
 
+import org.testcontainers.utility.DockerImageName;
+
 public class MSSQLServerContainerWrapper
         extends org.testcontainers.containers.MSSQLServerContainer<MSSQLServerContainerWrapper> {
 
+    @Deprecated
     public MSSQLServerContainerWrapper() {
-        super(IMAGE + ":" + DEFAULT_TAG);
+        super();
     }
 
     public MSSQLServerContainerWrapper(String image) {
         super(image);
+    }
+
+    public MSSQLServerContainerWrapper(DockerImageName dockerImageName) {
+        super(dockerImageName);
     }
 
     @Override
