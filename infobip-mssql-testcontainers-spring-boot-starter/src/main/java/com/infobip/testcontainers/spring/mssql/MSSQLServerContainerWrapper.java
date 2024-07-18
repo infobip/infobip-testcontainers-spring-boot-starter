@@ -7,7 +7,7 @@ public class MSSQLServerContainerWrapper
 
     @Deprecated
     public MSSQLServerContainerWrapper() {
-        super();
+        super("mcr.microsoft.com/mssql/server:2019-latest");
     }
 
     public MSSQLServerContainerWrapper(String image) {
