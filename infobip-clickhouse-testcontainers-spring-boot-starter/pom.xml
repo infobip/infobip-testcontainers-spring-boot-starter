@@ -10,7 +10,7 @@
 	<artifactId>infobip-clickhouse-testcontainers-spring-boot-starter</artifactId>
 
 	<properties>
-		<clickhouse-jdbc.version>0.3.2</clickhouse-jdbc.version>
+		<clickhouse-jdbc.version>0.4.6</clickhouse-jdbc.version>
 	</properties>
 
 	<dependencies>
