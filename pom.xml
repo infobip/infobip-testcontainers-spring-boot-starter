@@ -87,9 +87,9 @@
 
 	<properties>
 		<!-- DEPENDENCY VERSIONS -->
-		<spring-boot.version>3.3.1</spring-boot.version>
+		<spring-boot.version>3.5.0</spring-boot.version>
 
-		<testcontainers.version>1.20.0</testcontainers.version>
+		<testcontainers.version>1.21.0</testcontainers.version>
 
 		<!-- PLUGIN VERSIONS -->
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
