@@ -1,9 +1,5 @@
-### 4.4.1
+### 4.4.4
 * Added BOM (Bill of materials)
-
-### 4.4.0
-* Added BOM (Bill of materials)
-* Broken release
 
 ### 4.3.4
 * Upgraded to Spring Boot 3.3.1 and testcontainers 1.20.0
