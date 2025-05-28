@@ -1,3 +1,6 @@
+### 4.4.0
+* Added BOM (Bill of materials)
+
 ### 4.3.4
 * Upgraded to Spring Boot 3.3.1 and testcontainers 1.20.0
 * Upgraded mssql module base image to mcr.microsoft.com/mssql/server:2019-latest
