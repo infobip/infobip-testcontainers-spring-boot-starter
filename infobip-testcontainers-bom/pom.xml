@@ -5,6 +5,73 @@
 	<groupId>com.infobip</groupId>
 	<artifactId>infobip-testcontainers-bom</artifactId>
 	<version>4.4.4-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>Infobip TestContainers Spring Boot Starter</name>
+
+	<description>Infobip TestContainers Spring Boot Starter provides Spring Boot starters that ease the use of Testcontainers in test and local development scenarios.</description>
+
+	<organization>
+		<name>Infobip Ltd.</name>
+		<url>https://www.infobip.com/</url>
+	</organization>
+
+	<url>https://github.com/infobip/infobip-testcontainers-spring-boot-starter</url>
+
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>A business-friendly OSS license</comments>
+		</license>
+	</licenses>
+
+	<scm>
+		<url>git@github.com:infobip/infobip-testcontainers-spring-boot-starter.git</url>
+		<connection>scm:git:git@github.com:infobip/infobip-testcontainers-spring-boot-starter.git</connection>
+		<developerConnection>scm:git:git@github.com:infobip/infobip-testcontainers-spring-boot-starter.git</developerConnection>
+		<tag>infobip-testcontainers-spring-boot-starter-3.2.0</tag>
+	</scm>
+
+	<developers>
+		<developer>
+			<id>lpandzic</id>
+			<name>Lovro Pandžić</name>
+			<email>lovro.pandzic@infobip.com</email>
+			<organization>Infobip Ltd.</organization>
+		</developer>
+		<developer>
+			<id>NGril</id>
+			<name>Niko Gril</name>
+			<email>niko.gril@infobip.com&gt;</email>
+			<organization>Infobip Ltd.</organization>
+		</developer>
+		<developer>
+			<id>FraneJelavic</id>
+			<name>Frane Jelavić</name>
+			<email>frane.jelavic@infobip.com&gt;</email>
+			<organization>Infobip Ltd.</organization>
+		</developer>
+		<developer>
+			<id>igor-susic</id>
+			<name>Igor Šušić</name>
+			<email>igor.susic@infobip.com</email>
+			<organization>Infobip Ltd.</organization>
+		</developer>
+		<developer>
+			<id>tin-stavinoha</id>
+			<name>Tin Stavinoha</name>
+			<email>tin.stavinoha@infobip.com</email>
+			<organization>Infobip Ltd.</organization>
+		</developer>
+		<developer>
+			<id>rjalic</id>
+			<name>Roko Jalić</name>
+			<email>roko.jalic@infobip.com</email>
+			<organization>Infobip Ltd.</organization>
+		</developer>
+	</developers>
 
 	<properties>
 		<maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
