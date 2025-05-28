@@ -4,7 +4,7 @@
 
 	<groupId>com.infobip</groupId>
 	<artifactId>infobip-testcontainers-bom</artifactId>
-	<version>4.4.4</version>
+	<version>4.4.5-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Infobip TestContainers Spring Boot Starter</name>
@@ -31,7 +31,7 @@
 		<url>git@github.com:infobip/infobip-testcontainers-spring-boot-starter.git</url>
 		<connection>scm:git:git@github.com:infobip/infobip-testcontainers-spring-boot-starter.git</connection>
 		<developerConnection>scm:git:git@github.com:infobip/infobip-testcontainers-spring-boot-starter.git</developerConnection>
-		<tag>infobip-testcontainers-spring-boot-starter-4.4.4</tag>
+		<tag>infobip-testcontainers-spring-boot-starter-3.2.0</tag>
 	</scm>
 
 	<developers>
