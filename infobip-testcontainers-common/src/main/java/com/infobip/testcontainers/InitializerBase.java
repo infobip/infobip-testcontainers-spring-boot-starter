@@ -18,7 +18,7 @@ public abstract class InitializerBase<C extends Startable>
     public static final String PORT_PLACEHOLDER = "<port>";
     public static final String HOST_PLACEHOLDER = "<host>";
 
-    protected static final Pattern GENERIC_URL_WITH_PORT_GROUP_PATTERN = Pattern.compile(".*://.*:(\\d+)(/.*)?");
+    protected static final Pattern GENERIC_URL_WITH_PORT_GROUP_PATTERN = Pattern.compile(".*://.*:(\\d+)([/;].*)?");
 
     private final AtomicReference<C> container = new AtomicReference<>();
 

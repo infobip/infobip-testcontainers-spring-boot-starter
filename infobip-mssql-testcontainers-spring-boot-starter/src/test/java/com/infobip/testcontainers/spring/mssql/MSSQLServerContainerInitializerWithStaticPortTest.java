@@ -19,6 +19,7 @@ class MSSQLServerContainerInitializerWithStaticPortTest extends TestBase {
 
     private final Environment environment;
     private final DataSourceProperties properties;
+    private final MSSQLServerContainerWrapper mSSQLServerContainerWrapper;
 
     @Test
     void shouldCreateContainer() {
@@ -69,5 +70,22 @@ class MSSQLServerContainerInitializerWithStaticPortTest extends TestBase {
         } catch (SQLException e) {
             throw new IllegalArgumentException(e);
         }
+    }
+
+    @Test
+    void shouldBindContainerToStaticPort() {
+        // when
+        String jdbcUrl = environment.getProperty("spring.datasource.url");
+        String r2dbcUrl = environment.getProperty("spring.r2dbc.url");
+        String flywayUrl = environment.getProperty("spring.flyway.url");
+
+        // then
+        then(jdbcUrl).contains("localhost:5003");
+        then(r2dbcUrl).contains("localhost:5003");
+        then(flywayUrl).contains("localhost:5003");
+
+        then(mSSQLServerContainerWrapper.getPortBindings())
+                .hasSize(1)
+                .contains("5003:1433/tcp");
     }
 }
