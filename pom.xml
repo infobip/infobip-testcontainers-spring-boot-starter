@@ -1,10 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.infobip</groupId>
 	<artifactId>infobip-testcontainers-spring-boot-starter</artifactId>
-	<version>4.4.10-SNAPSHOT</version>
+	<version>4.4.10</version>
 	<packaging>pom</packaging>
 
 	<name>Infobip TestContainers Spring Boot Starter</name>
@@ -34,7 +33,7 @@
 		<connection>scm:git:git@github.com:infobip/infobip-testcontainers-spring-boot-starter.git</connection>
 		<developerConnection>scm:git:git@github.com:infobip/infobip-testcontainers-spring-boot-starter.git
 		</developerConnection>
-		<tag>infobip-testcontainers-spring-boot-starter-3.2.0</tag>
+		<tag>infobip-testcontainers-spring-boot-starter-4.4.10</tag>
 	</scm>
 
 	<modules>
