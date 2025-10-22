@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.infobip</groupId>
@@ -8,7 +9,9 @@
 
 	<name>Infobip TestContainers Spring Boot Starter</name>
 
-	<description>Infobip TestContainers Spring Boot Starter provides Spring Boot starters that ease the use of Testcontainers in test and local development scenarios.</description>
+	<description>Infobip TestContainers Spring Boot Starter provides Spring Boot starters that ease the use of
+		Testcontainers in test and local development scenarios.
+	</description>
 
 	<organization>
 		<name>Infobip Ltd.</name>
@@ -29,7 +32,8 @@
 	<scm>
 		<url>git@github.com:infobip/infobip-testcontainers-spring-boot-starter.git</url>
 		<connection>scm:git:git@github.com:infobip/infobip-testcontainers-spring-boot-starter.git</connection>
-		<developerConnection>scm:git:git@github.com:infobip/infobip-testcontainers-spring-boot-starter.git</developerConnection>
+		<developerConnection>scm:git:git@github.com:infobip/infobip-testcontainers-spring-boot-starter.git
+		</developerConnection>
 		<tag>infobip-testcontainers-spring-boot-starter-3.2.0</tag>
 	</scm>
 
@@ -39,12 +43,12 @@
 		<module>infobip-postgresql-testcontainers-spring-boot-starter</module>
 		<module>infobip-kafka-testcontainers-spring-boot-starter</module>
 		<module>infobip-redis-testcontainers-spring-boot-starter</module>
-        <module>infobip-rabbitmq-testcontainers-spring-boot-starter</module>
+		<module>infobip-rabbitmq-testcontainers-spring-boot-starter</module>
 		<module>infobip-clickhouse-testcontainers-spring-boot-starter</module>
 		<module>infobip-testcontainers-common</module>
 		<module>infobip-testcontainers-test-common</module>
 		<module>infobip-testcontainers-bom</module>
-    </modules>
+	</modules>
 
 	<developers>
 		<developer>
@@ -197,6 +201,16 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+
+			<plugin>
+				<groupId>org.sonatype.central</groupId>
+				<artifactId>central-publishing-maven-plugin</artifactId>
+				<version>0.9.0</version>
+				<extensions>true</extensions>
+				<configuration>
+					<publishingServerId>ossrh</publishingServerId>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -229,17 +243,4 @@
 			</build>
 		</profile>
 	</profiles>
-
-	<distributionManagement>
-		<repository>
-			<id>ossrh</id>
-			<name>SonatypeReleases</name>
-			<url>https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/</url>
-		</repository>
-		<snapshotRepository>
-			<id>ossrh-snapshots</id>
-			<name>SonatypeSnapshots</name>
-			<url>https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/</url>
-		</snapshotRepository>
-	</distributionManagement>
 </project>
