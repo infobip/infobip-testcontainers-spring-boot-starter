@@ -8,9 +8,7 @@
 
 	<name>Infobip TestContainers Spring Boot Starter</name>
 
-	<description>Infobip TestContainers Spring Boot Starter provides Spring Boot starters that ease the use of
-		Testcontainers in test and local development scenarios.
-	</description>
+	<description>Infobip TestContainers Spring Boot Starter provides Spring Boot starters that ease the use of Testcontainers in test and local development scenarios.</description>
 
 	<organization>
 		<name>Infobip Ltd.</name>
@@ -31,8 +29,7 @@
 	<scm>
 		<url>git@github.com:infobip/infobip-testcontainers-spring-boot-starter.git</url>
 		<connection>scm:git:git@github.com:infobip/infobip-testcontainers-spring-boot-starter.git</connection>
-		<developerConnection>scm:git:git@github.com:infobip/infobip-testcontainers-spring-boot-starter.git
-		</developerConnection>
+		<developerConnection>scm:git:git@github.com:infobip/infobip-testcontainers-spring-boot-starter.git</developerConnection>
 		<tag>infobip-testcontainers-spring-boot-starter-3.2.0</tag>
 	</scm>
 
@@ -42,12 +39,12 @@
 		<module>infobip-postgresql-testcontainers-spring-boot-starter</module>
 		<module>infobip-kafka-testcontainers-spring-boot-starter</module>
 		<module>infobip-redis-testcontainers-spring-boot-starter</module>
-		<module>infobip-rabbitmq-testcontainers-spring-boot-starter</module>
+        <module>infobip-rabbitmq-testcontainers-spring-boot-starter</module>
 		<module>infobip-clickhouse-testcontainers-spring-boot-starter</module>
 		<module>infobip-testcontainers-common</module>
 		<module>infobip-testcontainers-test-common</module>
 		<module>infobip-testcontainers-bom</module>
-	</modules>
+    </modules>
 
 	<developers>
 		<developer>
@@ -136,15 +133,6 @@
 	<build>
 		<pluginManagement>
 			<plugins>
-				<plugin>
-					<groupId>org.sonatype.central</groupId>
-					<artifactId>central-publishing-maven-plugin</artifactId>
-					<version>0.9.0</version>
-					<extensions>true</extensions>
-					<configuration>
-						<publishingServerId>central</publishingServerId>
-					</configuration>
-				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-javadoc-plugin</artifactId>
@@ -246,7 +234,7 @@
 		<repository>
 			<id>central</id>
 			<name>Central Repository</name>
-			<url>https://central.sonatype.com</url>
+			<url>https://central.sonatype.com/api/v1</url>
 		</repository>
 	</distributionManagement>
 </project>
