@@ -5,7 +5,7 @@
 	<groupId>com.infobip</groupId>
 	<artifactId>infobip-testcontainers-bom</artifactId>
     <name>infobip-testcontainers-bom</name>
-	<version>4.4.25-SNAPSHOT</version>
+	<version>4.4.27-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<description>Infobip TestContainers Spring Boot Starter provides Spring Boot starters that ease the use of Testcontainers in test and local development scenarios.</description>
@@ -153,8 +153,26 @@
 					<publishingServerId>central</publishingServerId>
 					<autoPublish>true</autoPublish>
 					<waitUntil>published</waitUntil>
+					<skipPublishing>true</skipPublishing>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>release-to-central</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.sonatype.central</groupId>
+						<artifactId>central-publishing-maven-plugin</artifactId>
+						<configuration>
+							<skipPublishing>false</skipPublishing>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

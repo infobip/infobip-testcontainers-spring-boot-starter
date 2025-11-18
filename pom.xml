@@ -3,7 +3,7 @@
 
 	<groupId>com.infobip</groupId>
 	<artifactId>infobip-testcontainers-spring-boot-starter</artifactId>
-	<version>4.4.25-SNAPSHOT</version>
+	<version>4.4.27-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Infobip TestContainers Spring Boot Starter</name>
@@ -247,8 +247,35 @@
                     <publishingServerId>central</publishingServerId>
                     <autoPublish>true</autoPublish>
                     <waitUntil>published</waitUntil>
+                    <skipPublishing>true</skipPublishing>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>3.1.2</version>
+                <configuration>
+                    <skip>true</skip>
                 </configuration>
             </plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>release-to-central</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.sonatype.central</groupId>
+						<artifactId>central-publishing-maven-plugin</artifactId>
+						<configuration>
+							<skipPublishing>false</skipPublishing>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
