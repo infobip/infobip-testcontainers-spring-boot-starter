@@ -4,10 +4,11 @@
     <parent>
 	    <groupId>com.infobip</groupId>
 	    <artifactId>infobip-testcontainers-spring-boot-starter</artifactId>
-	    <version>4.4.13-SNAPSHOT</version>
+	    <version>4.4.23-SNAPSHOT</version>
     </parent>
 
     <artifactId>infobip-rabbitmq-testcontainers-spring-boot-starter</artifactId>
+    <name>infobip-rabbitmq-testcontainers-spring-boot-starter</name>
 
     <dependencies>
 		<dependency>

@@ -3,14 +3,12 @@
 
 	<groupId>com.infobip</groupId>
 	<artifactId>infobip-testcontainers-spring-boot-starter</artifactId>
-	<version>4.4.13-SNAPSHOT</version>
+	<version>4.4.23-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Infobip TestContainers Spring Boot Starter</name>
 
-	<description>Infobip TestContainers Spring Boot Starter provides Spring Boot starters that ease the use of
-		Testcontainers in test and local development scenarios.
-	</description>
+	<description>Infobip TestContainers Spring Boot Starter provides Spring Boot starters that ease the use of Testcontainers in test and local development scenarios.</description>
 
 	<organization>
 		<name>Infobip Ltd.</name>
@@ -31,9 +29,8 @@
 	<scm>
 		<url>git@github.com:infobip/infobip-testcontainers-spring-boot-starter.git</url>
 		<connection>scm:git:git@github.com:infobip/infobip-testcontainers-spring-boot-starter.git</connection>
-		<developerConnection>scm:git:git@github.com:infobip/infobip-testcontainers-spring-boot-starter.git
-		</developerConnection>
-		<tag>infobip-testcontainers-spring-boot-starter-3.2.0</tag>
+		<developerConnection>scm:git:git@github.com:infobip/infobip-testcontainers-spring-boot-starter.git</developerConnection>
+		<tag>infobip-testcontainers-spring-boot-starter-4.4.22</tag>
 	</scm>
 
 	<modules>
@@ -42,12 +39,12 @@
 		<module>infobip-postgresql-testcontainers-spring-boot-starter</module>
 		<module>infobip-kafka-testcontainers-spring-boot-starter</module>
 		<module>infobip-redis-testcontainers-spring-boot-starter</module>
-		<module>infobip-rabbitmq-testcontainers-spring-boot-starter</module>
+        <module>infobip-rabbitmq-testcontainers-spring-boot-starter</module>
 		<module>infobip-clickhouse-testcontainers-spring-boot-starter</module>
 		<module>infobip-testcontainers-common</module>
 		<module>infobip-testcontainers-test-common</module>
 		<module>infobip-testcontainers-bom</module>
-	</modules>
+    </modules>
 
 	<developers>
 		<developer>
@@ -138,14 +135,6 @@
 			<plugins>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-javadoc-plugin</artifactId>
-					<version>${maven-javadoc-plugin.version}</version>
-					<configuration>
-						<source>${java.version}</source>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>${maven-surefire-plugin.version}</version>
 				</plugin>
@@ -202,47 +191,64 @@
 			</plugin>
 
 			<plugin>
-				<groupId>org.sonatype.central</groupId>
-				<artifactId>central-publishing-maven-plugin</artifactId>
-				<version>0.9.0</version>
-				<extensions>true</extensions>
-				<configuration>
-					<publishingServerId>central</publishingServerId>
-					<tokenAuth>true</tokenAuth>
-					<autoPublish>true</autoPublish>
-					<waitUntil>published</waitUntil>
-				</configuration>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.3.0</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${maven-javadoc-plugin.version}</version>
+				<configuration>
+					<doclint>none</doclint>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>${maven-gpg-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.9.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                    <autoPublish>true</autoPublish>
+                    <waitUntil>published</waitUntil>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
-
-	<profiles>
-		<profile>
-			<id>release-sign-artifacts</id>
-			<activation>
-				<property>
-					<name>performRelease</name>
-					<value>true</value>
-				</property>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<version>${maven-gpg-plugin.version}</version>
-						<executions>
-							<execution>
-								<id>sign-artifacts</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
 </project>
