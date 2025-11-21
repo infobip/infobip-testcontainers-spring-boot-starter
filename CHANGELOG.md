@@ -1,3 +1,6 @@
+### 5.0.0
+* Upgraded to Spring Boot 4 and testcontainers 2
+
 ### 4.4.4
 * Added BOM (Bill of materials)
 

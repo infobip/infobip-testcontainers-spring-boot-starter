@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.infobip</groupId>
 		<artifactId>infobip-testcontainers-spring-boot-starter</artifactId>
-		<version>4.4.27-SNAPSHOT</version>
+		<version>5.0.0-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>infobip-mssql-testcontainers-spring-boot-starter</artifactId>
@@ -25,8 +25,7 @@
 
 		<dependency>
 			<groupId>org.testcontainers</groupId>
-			<artifactId>mssqlserver</artifactId>
-			<version>${testcontainers.version}</version>
+			<artifactId>testcontainers-mssqlserver</artifactId>
 		</dependency>
 
 		<dependency>
