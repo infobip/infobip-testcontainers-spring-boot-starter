@@ -6,7 +6,7 @@ import org.assertj.core.api.BDDAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.boot.autoconfigure.amqp.RabbitProperties;
+import org.springframework.boot.amqp.autoconfigure.RabbitProperties;
 import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.BDDAssertions.then;

@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import com.infobip.testcontainers.TestBase;
 import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.boot.jdbc.autoconfigure.DataSourceProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;

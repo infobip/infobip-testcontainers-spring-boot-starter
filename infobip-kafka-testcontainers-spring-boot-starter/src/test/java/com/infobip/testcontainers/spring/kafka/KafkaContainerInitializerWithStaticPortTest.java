@@ -3,7 +3,7 @@ package com.infobip.testcontainers.spring.kafka;
 import com.infobip.testcontainers.TestBase;
 import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
+import org.springframework.boot.kafka.autoconfigure.KafkaProperties;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.test.context.ActiveProfiles;
